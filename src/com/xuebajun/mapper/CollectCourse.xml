@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.CollectCourseMapper">
+		<insert id="add" parameterType="CollectCourse">
+			insert into t_collect_course(user,course) values(#{user.phone},#{course.Id});
+		</insert>
+		
+		
+		<delete id="delete" parameterType="CollectCourse">
+			delete from t_collect_course where user=#{user.phone} and course=#{course.Id};
+		</delete>
+	</mapper>

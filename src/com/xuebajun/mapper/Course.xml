@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.CourseMapper">
+		<insert id="add" parameterType="Course">
+			insert into t_course(name) values(#{name});
+		</insert>
+		
+		
+		<delete id="delete" parameterType="Course">
+			delete from t_course where Id=#{Id};
+		</delete>
+		
+		<select id="getById" parameterType="Course" resultType="Course">
+			select * from t_course where Id=#{Id}
+		</select>
+	</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.CommentMapper">
+		<insert id="add" parameterType="Comment">
+			insert into t_comment(critic,reply,date,content,type,belong)
+			<if test="document!=null">
+				values(#{critic.phone},#{reply},#{date},#{content},'document',#{document.Id});		
+			</if>
+			<if test="book!=null">
+				values(#{critic.phone},#{reply},#{date},#{content},'book',#{book.Id});
+			</if>
+			<if test="course!=null">
+				values(#{critic.phone},#{reply},#{date},#{content},'course',#{course.Id});
+			</if>
+		</insert>
+		
+		
+		<delete id="deleteById" parameterType="Comment">
+			delete from t_comment where Id=#{id};
+		</delete>
+		
+		<delete id="deleteByFather" parameterType="Comment">
+			delete from t_comment where type=#{type} and belong=#{belong};
+		</delete> 
+		
+		<update id="change" parameterType="Comment">
+			update t_comment set content=#{content} where Id=#{id};
+		</update>
+		
+		<!-- 查看回复功能：得到回复列表 -->
+		 <resultMap type="Comment" id="ReplyBean">
+	    	<id column="comment_id" property="id"/>
+	    	
+	    	<collection property="replyList" ofType="Reply">
+	    	
+	    		<id column="reply_Id" property="Id"/>
+	    		<result column="reply_content" property="content"/>
+	    		<result column="reply_critic" property="critic"/>
+	    		<result column="reply_at" property="at"/>
+	    		<result column="reply_belong" property="belong"/>
+	    	</collection>
+	    </resultMap>
+	    
+	     <select id="getMyReplyList" resultMap="ReplyBean" parameterType="Comment">
+	    	select comment.*,reply.*,comment.id "comment_id",reply.Id "reply_Id",reply.content "reply_content",reply.critic "reply_critic",reply.at "reply_at",reply.belong "reply_belong"
+	    	from t_comment comment
+	    	left join t_reply reply on comment.id=reply.belong
+	    	where comment.id=#{id};
+	    </select>
+	</mapper>

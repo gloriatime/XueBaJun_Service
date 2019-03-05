@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.CollectBookMapper">
+		<insert id="add" parameterType="CollectBook">
+			insert into t_collect_book(user,book) values(#{user.phone},#{book.Id});
+		</insert>
+		
+		
+		<delete id="delete" parameterType="CollectBook">
+			delete from t_collect_book where user=#{user.phone} and book=#{book.Id};
+		</delete>
+	</mapper>

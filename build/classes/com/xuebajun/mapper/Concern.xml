@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.ConcernMapper">
+		<insert id="add" parameterType="Concern">
+			insert into t_concern(user,my_concern) values(#{user.phone},#{my_concern.phone});
+		</insert>
+		
+		
+		<delete id="deleteMyConcern" parameterType="Concern">
+			delete from t_concern where user=#{user.phone} and my_concern=#{my_concern.phone};
+		</delete>
+	</mapper>

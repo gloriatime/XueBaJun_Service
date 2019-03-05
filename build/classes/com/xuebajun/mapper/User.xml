@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.xuebajun.mapper.UserMapper">
+	
+		<!-- 注册登录功能 -->
+	    <insert id="add" parameterType="User" >
+	        insert into t_user(name,pwd,grade,phone,college,medicine,technology,art,agriculture,management,humanity,play) values (#{name},#{pwd},#{grade},#{phone},#{college},#{medicine},#{technology},#{art},#{agriculture},#{management},#{humanity},#{play})    
+	    </insert>
+  
+	    <select id="selectByPhone" parameterType="String" resultType="User">
+	        select * from t_user where phone=#{phone}    
+	    </select>
+	    
+	    <!-- 修改个人信息功能 -->
+	    <update id="changePoint" parameterType="User">
+	    	update t_user set point=#{point} where phone=#{phone}
+	    </update>
+	    
+	    <update id="changeName" parameterType="User">
+	    	update t_user set name=#{name} where phone=#{phone}
+	    </update>
+    
+    	<update id="changeCollege" parameterType="User">
+	    	update t_user set college=#{college} where phone=#{phone}
+	    </update>
+	    
+	    <update id="changeGrade" parameterType="User">
+	    	update t_user set grade=#{grade} where phone=#{phone}
+	    </update>
+	    
+	    <update id="changePwd" parameterType="User">
+	    	update t_user set pwd=#{pwd} where phone=#{phone}
+	    </update>
+	    
+	    <update id="changeInterest" parameterType="User">
+	    	update t_user set medicine=#{medicine},technology=#{technology},art=#{art},agriculture=#{agriculture},management=#{management},humanity=#{humanity},play=#{play} where phone=#{phone}
+	    </update>
+	    
+	    <!-- 我的关注功能 :查看列表-->
+	    <resultMap type="User" id="MyConcernBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="myconcernlist" ofType="Concern">
+	    	
+	    		<association property="my_concern" javaType="User">
+	    			<id column="my_concern_phone" property="phone"/>
+	    			<result column="my_concern_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <resultMap type="User" id="ConcernMeBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="concern_me_list" ofType="Concern">
+	    	
+	    		<association property="user" javaType="User">
+	    			<id column="concern_me_phone" property="phone"/>
+	    			<result column="concern_me_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <select id="getMyConcernList" resultMap="MyConcernBean" parameterType="User">
+	    	select user.*,my_concern.*,concern.*,user.phone "user_phone",my_concern.phone "my_concern_phone",my_concern.name "my_concern_name"
+	    	from t_user user
+	    	left join t_concern concern on user.phone=concern.user
+	    	left join t_user my_concern on concern.my_concern=my_concern.phone
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <select id="getConcernMeList" resultMap="ConcernMeBean" parameterType="User">
+	    	select user.*,concern_me.*,concern.*,user.phone "user_phone",concern_me.phone "concern_me_phone",concern_me.name "concern_me_name"
+	    	from t_user user
+	    	left join t_concern concern on user.phone=concern.my_concern
+	    	left join t_user concern_me on concern.user=concern_me.phone
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <!-- 我的收藏功能 :查看收藏列表-->
+	    <resultMap type="User" id="MyCollectedDocumentsBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="collected_documents" ofType="CollectDocument">
+	    	
+	    		<association property="document" javaType="Document">
+	    			<id column="document_Id" property="Id"/>
+	    			<result column="document_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <resultMap type="User" id="MyCollectedBooksBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="collected_books" ofType="CollectBook">
+	    	
+	    		<association property="book" javaType="Book">
+	    			<id column="book_Id" property="Id"/>
+	    			<result column="book_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <resultMap type="User" id="MyCollectedCoursesBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="collected_courses" ofType="CollectCourse">
+	    	
+	    		<association property="course" javaType="Course">
+	    			<id column="course_Id" property="Id"/>
+	    			<result column="course_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <select id="getMyCollectedDocumentsList" resultMap="MyCollectedDocumentsBean" parameterType="User">
+	    	select user.*,collect.*,document.*,user.phone "user_phone",document.Id "document_Id",document.name "document_name"
+	    	from t_user user
+	    	left join t_collect_document collect on user.phone=collect.user
+	    	left join t_document document on collect.document=document.Id
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <select id="getMyCollectedBooksList" resultMap="MyCollectedBooksBean" parameterType="User">
+	    	select user.*,collect.*,book.*,user.phone "user_phone",book.Id "book_Id",book.name "book_name"
+	    	from t_user user
+	    	left join t_collect_book collect on user.phone=collect.user
+	    	left join t_book book on collect.book=book.Id
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <select id="getMyCollectedCoursesList" resultMap="MyCollectedCoursesBean" parameterType="User">
+	    	select user.*,collect.*,course.*,user.phone "user_phone",course.Id "course_Id",course.name "course_name"
+	    	from t_user user
+	    	left join t_collect_course collect on user.phone=collect.user
+	    	left join t_course course on collect.course=course.Id
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <!-- “关于我的”功能：查看列表 -->
+	     <resultMap type="User" id="MydocumentBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="myDocument" ofType="Document">
+	    	
+	    		<id column="document_Id" property="Id"/>
+	    		<result column="document_name" property="name"/>
+	    		<result column="document_upUser" property="up_user"/>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <resultMap type="User" id="MyCommentBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="myComment" ofType="Comment">
+	    	
+	    		<id column="comment_id" property="id"/>
+	    		<result column="comment_content" property="content"/>
+	    		<result column="comment_critic" property="critic"/>
+	    		<result column="comment_type" property="type"/>
+	    		<result column="comment_belong" property="belong"/>
+	    		
+	    	</collection>
+	    </resultMap>
+	    
+	     <resultMap type="User" id="MyNewsBean">
+	    	<id column="user_phone" property="phone"/>
+	    	
+	    	<collection property="myNews" ofType="News">	    	
+	    		<id column="news_id" property="id"/>
+	    		<result column="news_content" property="content"/>	    		
+	    	</collection>
+	    </resultMap>
+	    
+	    <select id="getMydocumentList" resultMap="MydocumentBean" parameterType="User">
+	    	select user.*,document.*,user.phone "user_phone",document.Id "document_Id",document.name "document_name",document.up_user "document_upUser"
+	    	from t_user user
+	    	left join t_document document on user.phone=document.up_user
+	    	where user.phone=#{phone};
+	    </select>
+	    
+	    <select id="getMyCommentList" resultMap="MyCommentBean" parameterType="User">
+	    	
+	    	select user.*,comment.*,user.phone "user_phone",comment.id "comment_id",comment.content "comment_content",comment.critic "comment_critic",comment.type "comment_type",comment.belong "comment_belong"
+			from t_user user
+	    	left join t_comment comment on comment.critic=user.phone
+	    	where user.phone=#{phone};
+
+	    </select>
+	    
+	    <select id="getMyNewsList" resultMap="MyNewsBean" parameterType="User">
+	    	
+	    	select user.*,news.*,user.phone "user_phone",news.id "news_id",news.content "news_content"
+			from t_user user
+	    	left join t_news news on news.belong=user.phone
+	    	where user.phone=#{phone};
+
+	    </select>
+	</mapper>
