@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,5 +38,10 @@ public class DocumentController {
     @RequestMapping("/DeleteDocument")
     public void deleteDocument(@RequestBody Document document) {
        documentService.delete(document);
+    }
+    
+    @RequestMapping("/GetDocument")
+    public @ResponseBody Document getDocument(@RequestBody Document document) {
+       return documentService.selectById(document);
     }
 }

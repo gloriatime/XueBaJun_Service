@@ -187,5 +187,18 @@ public class TestHaha {
 		c.setContent("我尿黄，让我来滋醒他");
 		commentService.change(c);	
 	}
+	
+	@Test
+	public void SelectDocumentById() {
+		Document d = new Document();
+		d.setId(3);
+		d = documentService.selectById(d);
+		System.out.println("资料名："+d.getName());
+		List<Comment> list = d.getCommentList();
+		for(Comment c:list) {
+			System.out.println("   评论："+c.getId()+c.getContent());
+		}
+		
+	}
 }
 

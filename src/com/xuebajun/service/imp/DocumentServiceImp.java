@@ -62,8 +62,15 @@ public class DocumentServiceImp implements DocumentService {
 	@Override
 	public Document selectById(Document d) {
 		// TODO Auto-generated method stub
+		d = documentMapper.getById(d);
+		Document temp = new Document();
+	
+		temp = documentMapper.getMyCommentList(d);
+		List<Comment> commentList = temp.getCommentList();
 		
-		return documentMapper.getById(d);
+		d.setCommentList(commentList);
+			
+		return d;
 	}
 
 }
