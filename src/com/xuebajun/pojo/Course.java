@@ -1,5 +1,7 @@
 package com.xuebajun.pojo;
 
+import java.util.List;
+
 public class Course {
 	private int Id;
 	private String name;
@@ -8,6 +10,10 @@ public class Course {
 	private float score;
 	private int number;
 	private int comment;
+	
+	// ËÑË÷¹¦ÄÜ
+	private List<Course> courseList;
+	
 	public int getId() {
 		return Id;
 	}
@@ -49,6 +55,12 @@ public class Course {
 	}
 	public void setComment(int comment) {
 		this.comment = comment;
+	}
+	public List<Course> getCourseList() {
+		return courseList;
+	}
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
 	}
 
 }

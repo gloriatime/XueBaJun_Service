@@ -1,5 +1,6 @@
 package com.xuebajun.pojo;
 
+import java.util.List;
 
 public class Book {
 	private int Id;
@@ -12,6 +13,9 @@ public class Book {
 	private int comment;
 	private int download;
 	private String cover;
+	
+	// ËÑË÷¹¦ÄÜ
+	private List<Book> bookList;
 
 	public int getId() {
 		return Id;
@@ -97,5 +101,13 @@ public class Book {
 
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+
+	public List<Book> getBookList() {
+		return bookList;
+	}
+
+	public void setBookList(List<Book> bookList) {
+		this.bookList = bookList;
 	}
 }

@@ -16,4 +16,12 @@
 		<select id="getById" parameterType="Course" resultType="Course">
 			select * from t_course where Id=#{Id}
 		</select>
+		
+		<!-- 搜索课程功能：得到课程列表 -->
+	    <select id="searchCourseList" parameterType="Course" resultType="Course">
+	    	select *
+	    	from t_course 
+	    	where name like '%${name}%' or intro like '%${name}%'
+	    </select>
+	    
 	</mapper>

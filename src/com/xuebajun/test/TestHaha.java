@@ -16,12 +16,14 @@ import com.xuebajun.pojo.CollectCourse;
 import com.xuebajun.pojo.CollectDocument;
 import com.xuebajun.pojo.Comment;
 import com.xuebajun.pojo.Concern;
+import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.User;
 import com.xuebajun.service.AboutMeService;
 import com.xuebajun.service.CommentService;
 import com.xuebajun.service.DocumentService;
+import com.xuebajun.service.SearchService;
 import com.xuebajun.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +40,8 @@ public class TestHaha {
 	private DocumentService documentService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private SearchService searchService;
 	
 	@Test
 	public void testAdd() {
@@ -49,7 +53,7 @@ public class TestHaha {
 		//u.setCollege("计算机");
 		//u.setPoint(200);
 		//userMapper.add(u);
-		userService.addUser(u);
+		//userService.addUser(u);
 	}
 	
 	@Test
@@ -199,6 +203,19 @@ public class TestHaha {
 			System.out.println("   评论："+c.getId()+c.getContent());
 		}
 		
+	}
+	
+	@Test
+	public void testSearch() {
+		Course c = new Course();
+		c.setName("数");		
+		c = searchService.searchCourse(c);
+		List<Course> result = c.getCourseList();
+		System.out.println("搜索数据返回：");
+		for(Course course:result) {
+			System.out.println(" "+course.getName());
+			System.out.println("   "+course.getIntro());
+		}
 	}
 }
 

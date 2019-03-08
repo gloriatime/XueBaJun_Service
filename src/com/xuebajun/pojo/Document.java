@@ -18,6 +18,9 @@ public class Document {
 	// 所属评论列表
 	private List<Comment> commentList;
 	
+	// 搜索功能
+	private List<Document> documentList;
+	
 	
 	public int getId() {
 		return Id;
@@ -84,6 +87,12 @@ public class Document {
 	}
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+	public List<Document> getDocumentList() {
+		return documentList;
+	}
+	public void setDocumentList(List<Document> documentList) {
+		this.documentList = documentList;
 	}
 	
 

@@ -16,4 +16,12 @@
 		<select id="getById" parameterType="Book" resultType="Book">
 			select * from t_book where Id=#{Id}
 		</select>
+		
+		 <!-- 搜索功能：得到列表 -->
+	    <select id="searchBookList" parameterType="Book" resultType="Book">
+	    	select *
+	    	from t_book
+	    	where name like '%${name}%' or author like '%${name}%' or intro like '%${name}%'
+	    </select>
+	    
 	</mapper>

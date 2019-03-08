@@ -40,4 +40,11 @@
 	    	left join t_comment comment on comment.type='‘document’' and document.id=comment.belong
 	    	where document.id=#{Id};
 	    </select>
+	    
+	    <!-- 搜索功能：得到列表 -->
+	    <select id="searchDocumentList" parameterType="Document" resultType="Document">
+	    	select *
+	    	from t_document 
+	    	where name like '%${name}%' or author like '%${name}%'
+	    </select>
 	</mapper>
