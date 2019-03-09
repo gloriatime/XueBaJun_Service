@@ -24,4 +24,13 @@
 	    	where name like '%${name}%' or author like '%${name}%' or intro like '%${name}%'
 	    </select>
 	    
+	    <!-- 推荐系统：得到近一周热度第一 -->
+	    <select id="getTopOne" parameterType="TopDate" resultType="Book">
+	    	select book.Id,book.name,count(*)
+			from t_book as book, t_comment as comment
+			where date between #{begin} and #{end} and belong = book.Id and type='‘book’';
+	    </select>
+	    <select id="getLastOne" resultType="Course">
+			select Id,name from t_book order by Id DESC limit 1
+	    </select>
 	</mapper>

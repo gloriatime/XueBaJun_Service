@@ -44,6 +44,7 @@ public class CollectController {
 	@RequestMapping("/CollectDocument")
 	public void collectDocument(@RequestBody CollectDocument c) {
 		collectService.collectDocument(c);
+		
 	}
 	
 	@RequestMapping("/DeleteCollectedBook")

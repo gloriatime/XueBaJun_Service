@@ -24,6 +24,7 @@ import com.xuebajun.service.AboutMeService;
 import com.xuebajun.service.CommentService;
 import com.xuebajun.service.DocumentService;
 import com.xuebajun.service.SearchService;
+import com.xuebajun.service.TopService;
 import com.xuebajun.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,6 +43,8 @@ public class TestHaha {
 	private CommentService commentService;
 	@Autowired
 	private SearchService searchService;
+	@Autowired
+	private TopService topService;
 	
 	@Test
 	public void testAdd() {
@@ -216,6 +219,16 @@ public class TestHaha {
 			System.out.println(" "+course.getName());
 			System.out.println("   "+course.getIntro());
 		}
+	}
+	
+	@Test
+	public void testGetTopOne() {
+		Document d = new Document();
+		d = topService.getTopDocument();
+		System.out.println("Top1返回：");
+		// 如果大家都是0评论会输出最新上传的一个
+		System.out.println(" "+d.getName());
+		
 	}
 }
 

@@ -24,4 +24,15 @@
 	    	where name like '%${name}%' or intro like '%${name}%'
 	    </select>
 	    
+	   <!-- 推荐系统：得到近一周热度第一 -->
+	    <select id="getTopOne" parameterType="TopDate" resultType="Course">
+	    	select course.Id,course.name,count(*)
+			from t_course as course, t_comment as comment
+			where date between #{begin} and #{end} and belong = course.Id and type='‘course’';
+	    </select>
+	    <select id="getLastOne" resultType="Course">
+			select Id,name from t_course order by Id DESC limit 1
+	    </select>
+	    
+	    
 	</mapper>
