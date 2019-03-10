@@ -20,9 +20,11 @@ import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.User;
+import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.AboutMeService;
 import com.xuebajun.service.CommentService;
 import com.xuebajun.service.DocumentService;
+import com.xuebajun.service.RecommendService;
 import com.xuebajun.service.SearchService;
 import com.xuebajun.service.TopService;
 import com.xuebajun.service.UserService;
@@ -45,6 +47,8 @@ public class TestHaha {
 	private SearchService searchService;
 	@Autowired
 	private TopService topService;
+	@Autowired
+	private RecommendService recommendService;
 	
 	@Test
 	public void testAdd() {
@@ -228,6 +232,28 @@ public class TestHaha {
 		System.out.println("Top1返回：");
 		// 如果大家都是0评论会输出最新上传的一个
 		System.out.println(" "+d.getName());
+		
+	}
+	
+	@Test
+	public void testGetRecommendListOfMainPage() {
+		User u = new User();
+		u.setPhone("13061765432");
+		u.setTechnology(true);
+		u.setArt(true);
+		UserTag ut = new UserTag();
+		ut = recommendService.getRecommendList(u);
+		List<Document> documents = ut.getRecommendDocumentList();
+		List<Course> courses = ut.getRecommendCourseList();
+		
+		System.out.println("推荐资料：");
+		for(Document d:documents) {
+			System.out.println(" "+d.getName());
+		}
+		System.out.println("推荐课程：");
+		for(Course c:courses) {
+			System.out.println(" "+c.getName());
+		}
 		
 	}
 }

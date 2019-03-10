@@ -58,4 +58,5 @@
 	    <select id="getLastOne" resultType="Document">
 			select Id,name from t_document order by Id DESC limit 1
 	    </select>
+	    
 	</mapper>

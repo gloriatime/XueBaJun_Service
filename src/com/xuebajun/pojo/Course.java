@@ -62,5 +62,18 @@ public class Course {
 	public void setCourseList(List<Course> courseList) {
 		this.courseList = courseList;
 	}
+	
+	// 重写相同判别法，过滤推荐列表中的相同元素
+	@Override 
+	public int hashCode() {
+		return Id;
+	}
+	@Override
+    public boolean equals(Object x){
+        if(this.getClass() != x.getClass())
+            return false;
+        Course c = (Course)x;
+        return this.Id == c.Id;
+    }
 
 }

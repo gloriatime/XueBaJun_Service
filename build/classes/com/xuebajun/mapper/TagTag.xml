@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.TagTagMapper">
+		<insert id="add" parameterType="TagTag">
+			insert into t_tag_tag(tag,belong,type) values(#{tag},#{belong},#{type});
+		</insert>
+		
+		
+		<delete id="delete" parameterType="Tag">
+			delete from t_tag_tag where Id=#{Id};
+		</delete>
+		
+		<!--  推荐系统：找到包含某tag的相关资源列表-->
+	    <select id="getDocumentListByTag" parameterType="Tag" resultType="Document">
+	    	select document.Id,document.name
+			from t_tag_tag as tag_tag,t_document as document
+			where tag_tag.tag = #{Id} and tag_tag.type='document' and tag_tag.belong=document.Id;
+	    </select>
+	    <select id="getCourseListByTag" parameterType="Tag" resultType="Course">
+	    	select course.Id,course.name
+			from t_tag_tag as tag_tag,t_course as course
+			where tag_tag.tag = #{Id} and tag_tag.type='course' and tag_tag.belong=course.Id;
+	    </select>
+	    <select id="getBookListByTag" parameterType="Tag" resultType="Book">
+	    	select book.Id,book.name
+			from t_tag_tag as tag_tag,t_book as book
+			where tag_tag.tag = #{Id} and tag_tag.type='book' and tag_tag.belong=book.Id;
+	    </select>
+		
+	</mapper>
