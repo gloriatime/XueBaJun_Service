@@ -178,7 +178,7 @@ public class TestHaha {
 		d.setAuthor("ÇåÃ÷");
 		d.setUp_time(new Date());
 		d.setUrl("document/test.jpg");
-		documentService.add(d);
+		//documentService.add(d);
 		
 	}
 

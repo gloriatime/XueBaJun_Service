@@ -15,8 +15,8 @@
 		
 		<!--  推荐系统：找到包含某tag的相关资源列表-->
 	    <select id="getDocumentListByTag" parameterType="Tag" resultType="Document">
-	    	select document.Id,document.name
-			from t_tag_tag as tag_tag,t_document as document
+	    	select document.*
+			from t_tag_tag as tag_tag,t_simple_document as document
 			where tag_tag.tag = #{Id} and tag_tag.type='document' and tag_tag.belong=document.Id;
 	    </select>
 	    <select id="getCourseListByTag" parameterType="Tag" resultType="Course">

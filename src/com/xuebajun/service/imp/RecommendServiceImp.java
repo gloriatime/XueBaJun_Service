@@ -81,7 +81,7 @@ public class RecommendServiceImp implements RecommendService {
 		courses.addAll(h);
 		h.clear();
 		
-		courses.stream().distinct().collect(Collectors.toList());
+		//courses.stream().distinct().collect(Collectors.toList());
 		
 		h.addAll(books);
 		books.clear();
