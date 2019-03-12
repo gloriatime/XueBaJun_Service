@@ -15,4 +15,6 @@ public interface BookMapper {
 	
 	public Book getTopOne(TopDate topDate);
 	public Book getLastOne();
+	public List<Book> getTopTwenty(TopDate topDate);
+	
 }

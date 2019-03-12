@@ -14,4 +14,5 @@ public interface CourseMapper {
 	
 	public Course getTopOne(TopDate topDate);
 	public Course getLastOne();
+	public List<Course> getTopTwenty(TopDate topDate);
 }

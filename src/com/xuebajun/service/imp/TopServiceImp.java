@@ -60,5 +60,24 @@ public class TopServiceImp implements TopService{
 		}
 		return b;
 	}
+	
+	@Override
+	public Course getTopTwentyCourse() {
+		// TODO Auto-generated method stub
+		TopDate topDate = new TopDate();
+		Course c = new Course();
+		c.setTopTwentyList(courseMapper.getTopTwenty(topDate));
+	
+		return c;
+	}
+
+	@Override
+	public Book getTopTwentyBook() {
+		// TODO Auto-generated method stub
+		TopDate topDate = new TopDate();
+		Book b = new Book();
+		b.setTopTwentyList(bookMapper.getTopTwenty(topDate));
+		return b;
+	}
 
 }

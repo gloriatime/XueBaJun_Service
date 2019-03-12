@@ -33,4 +33,14 @@
 	    <select id="getLastOne" resultType="Course">
 			select Id,name from t_book order by Id DESC limit 1
 	    </select>
+	    
+	    <!-- 推荐系统：得到近一周热度20 -->
+	    <select id="getTopTwenty" parameterType="TopDate" resultType="Book">
+	    	select book.Id,book.name,count(*) as heat
+			from t_book as book, t_comment as comment
+			where date between #{begin} and #{end} and belong = book.Id and type='‘book’'
+			order by heat DESC limit 20;
+	    </select>
+	    
+	    
 	</mapper>

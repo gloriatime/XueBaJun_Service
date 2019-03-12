@@ -33,4 +33,15 @@ public class TopController {
 	public @ResponseBody Course getMyCourse() throws Exception {
 		return topService.getTopCourse();
 	}
+	
+	@RequestMapping("/GetTopTwentyBook")
+	public @ResponseBody Book getTwentyBook() throws Exception {
+		return topService.getTopTwentyBook();
+	}
+	
+	@RequestMapping("/GetTopTwentyCourse")
+	public @ResponseBody Course getTwentyCourse() throws Exception {
+		return topService.getTopTwentyCourse();
+	}
+	
 }

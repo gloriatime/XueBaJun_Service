@@ -8,4 +8,6 @@ public interface TopService {
 	public Document getTopDocument();
 	public Course getTopCourse();
 	public Book getTopBook();
+	public Course getTopTwentyCourse();
+	public Book getTopTwentyBook();
 }

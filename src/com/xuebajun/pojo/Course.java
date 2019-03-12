@@ -17,6 +17,9 @@ public class Course {
 	// 推荐功能--猜你喜欢
 	private List<Course> recommendList;
 	
+	// 20热门
+	private List<Course> topTwentyList;
+	
 	public int getId() {
 		return Id;
 	}
@@ -83,6 +86,12 @@ public class Course {
 	}
 	public void setRecommendList(List<Course> recommendList) {
 		this.recommendList = recommendList;
+	}
+	public List<Course> getTopTwentyList() {
+		return topTwentyList;
+	}
+	public void setTopTwentyList(List<Course> topTwentyList) {
+		this.topTwentyList = topTwentyList;
 	}
 
 }
