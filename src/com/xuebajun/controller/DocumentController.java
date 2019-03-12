@@ -40,8 +40,4 @@ public class DocumentController {
        documentService.delete(document);
     }
     
-    @RequestMapping("/GetDocument")
-    public @ResponseBody Document getDocument(@RequestBody Document document) {
-       return documentService.selectById(document);
-    }
 }

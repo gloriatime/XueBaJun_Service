@@ -11,6 +11,9 @@ public interface BookMapper {
 	public void add(Book book);
 	public void delete(Book book);
 	public Book getById(Book book);
+	
+	public Book getMyCommentList(Book book);
+	
 	public List<Book> searchBookList(Book book);
 	
 	public Book getTopOne(TopDate topDate);

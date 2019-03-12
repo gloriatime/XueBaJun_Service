@@ -67,4 +67,11 @@ public class CommentServiceImp implements CommentService {
 		// TODO Auto-generated method stub
 		commentMapper.change(comment);
 	}
+	
+	@Override
+	public Comment getCommentById(Comment comment) {
+		comment = commentMapper.getById(comment);
+		comment.setReplyList(commentMapper.getMyReplyList(comment));
+		return comment;
+	}
 }

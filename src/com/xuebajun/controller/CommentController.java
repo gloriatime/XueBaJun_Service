@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xuebajun.pojo.Comment;
 import com.xuebajun.service.CommentService;
@@ -28,5 +29,10 @@ public class CommentController {
     @RequestMapping("/ChangeComment")
     public void changeComment(@RequestBody Comment comment) {
     	commentService.change(comment);
+    }
+    
+    @RequestMapping("/GetComment")
+    public @ResponseBody Comment getComment(@RequestBody Comment comment) {
+    	return commentService.getCommentById(comment);
     }
 }

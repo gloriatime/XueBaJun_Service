@@ -11,6 +11,9 @@ public class Course {
 	private int number;
 	private int comment;
 	
+	// 所属评论列表
+	private List<Comment> commentList;
+	
 	// 搜索功能
 	private List<Course> courseList;
 	
@@ -92,6 +95,12 @@ public class Course {
 	}
 	public void setTopTwentyList(List<Course> topTwentyList) {
 		this.topTwentyList = topTwentyList;
+	}
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 
 }

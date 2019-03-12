@@ -30,6 +30,10 @@
 			update t_comment set content=#{content} where Id=#{id};
 		</update>
 		
+		<select id="getById" parameterType="Comment"  resultType="Comment">
+			select * from t_comment where Id=#{id};
+		</select>
+		
 		<!-- 查看回复功能：得到回复列表 -->
 		 <resultMap type="Comment" id="ReplyBean">
 	    	<id column="comment_id" property="id"/>

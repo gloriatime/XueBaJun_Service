@@ -17,6 +17,28 @@
 			select * from t_course where Id=#{Id}
 		</select>
 		
+		<!-- 查看评论功能：得到评论列表 -->
+		 <resultMap type="Course" id="CourseBean">
+	    	<id column="course_id" property="Id"/>
+	    	
+	    	<collection property="commentList" ofType="Comment">
+	    	
+	    		<id column="comment_Id" property="id"/>
+	    		<result column="comment_content" property="content"/>
+	    		<result column="comment_critic" property="critic"/>
+	    		<result column="comment_date" property="date"/>
+	    		<result column="comment_type" property="type"/>
+	    		<result column="comment_belong" property="belong"/>
+	    	</collection>
+	    </resultMap>
+	    
+	     <select id="getMyCommentList" resultMap="CourseBean" parameterType="Course">
+	    	select comment.*,course.*,course.Id "course_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong"
+	    	from t_course course
+	    	left join t_comment comment on comment.type='‘course’' and course.Id=comment.belong
+	    	where course.Id=#{Id};
+	    </select>
+		
 		<!-- 搜索课程功能：得到课程列表 -->
 	    <select id="searchCourseList" parameterType="Course" resultType="Course">
 	    	select *

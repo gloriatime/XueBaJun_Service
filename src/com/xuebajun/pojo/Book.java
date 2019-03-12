@@ -14,6 +14,9 @@ public class Book {
 	private int download;
 	private String cover;
 	
+	// 所属评论列表
+	private List<Comment> commentList;
+	
 	// 搜索功能
 	private List<Book> bookList;
 
@@ -144,5 +147,13 @@ public class Book {
 
 		public void setTopTwentyList(List<Book> topTwentyList) {
 			this.topTwentyList = topTwentyList;
+		}
+
+		public List<Comment> getCommentList() {
+			return commentList;
+		}
+
+		public void setCommentList(List<Comment> commentList) {
+			this.commentList = commentList;
 		}
 }

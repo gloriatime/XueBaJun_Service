@@ -11,4 +11,5 @@ public interface CommentMapper {
 	public void deleteByFather(Comment comment);
 	public List<Reply> getMyReplyList(Comment comment);
 	public void change(Comment comment);
+	public Comment getById(Comment comment);
 }

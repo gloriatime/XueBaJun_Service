@@ -7,4 +7,5 @@ public interface CommentService {
 	public void deleteById(Comment comment);
 	public void add(Comment comment);
 	public void change(Comment comment);
+	public Comment getCommentById(Comment comment);
 }
