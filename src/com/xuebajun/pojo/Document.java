@@ -24,6 +24,9 @@ public class Document {
 	// 对应标签序列
 	private List<Tag> tagList;
 	
+	// 推荐功能--猜你喜欢
+	private List<Document> recommendList;
+	
 	public int getId() {
 		return Id;
 	}
@@ -114,6 +117,12 @@ public class Document {
 		}
 		public void setTagList(List<Tag> tagList) {
 			this.tagList = tagList;
+		}
+		public List<Document> getRecommendList() {
+			return recommendList;
+		}
+		public void setRecommendList(List<Document> recommendList) {
+			this.recommendList = recommendList;
 		}
 
 }

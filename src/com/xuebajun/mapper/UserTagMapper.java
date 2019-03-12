@@ -11,4 +11,6 @@ public interface UserTagMapper {
 	
 	public void pulsOnetoTimes(UserTag ut);
 	public void pulsTentoTimes(UserTag ut);
+	
+	public List<UserTag> getUserTagByUser(UserTag ut);
 }

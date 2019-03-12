@@ -14,6 +14,9 @@ public class Course {
 	// 搜索功能
 	private List<Course> courseList;
 	
+	// 推荐功能--猜你喜欢
+	private List<Course> recommendList;
+	
 	public int getId() {
 		return Id;
 	}
@@ -75,5 +78,11 @@ public class Course {
         Course c = (Course)x;
         return this.Id == c.Id;
     }
+	public List<Course> getRecommendList() {
+		return recommendList;
+	}
+	public void setRecommendList(List<Course> recommendList) {
+		this.recommendList = recommendList;
+	}
 
 }

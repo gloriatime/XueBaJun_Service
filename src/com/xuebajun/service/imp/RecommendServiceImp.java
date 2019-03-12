@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.xuebajun.mapper.TagMapper;
 import com.xuebajun.mapper.TagTagMapper;
+import com.xuebajun.mapper.UserTagMapper;
 import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
@@ -26,6 +27,8 @@ public class RecommendServiceImp implements RecommendService {
 	TagTagMapper tagTagMapper;
 	@Autowired
 	TagMapper tagMapper;
+	@Autowired
+	UserTagMapper userTagMapper;
 	
 	List<Document> documents = new ArrayList<>();
 	List<Course> courses = new ArrayList<>();
@@ -108,6 +111,88 @@ public class RecommendServiceImp implements RecommendService {
 			courses.addAll(tagTagMapper.getCourseListByTag(tag));
 			books.addAll(tagTagMapper.getBookListByTag(tag));
 		}
+	}
+
+
+	@Override
+	public Document getRecommendDocumentList(User user) {
+		// TODO Auto-generated method stub
+		
+		List<Document> recommendList = new ArrayList<>();
+		
+		// 先得到用户接触过的标签列表
+		UserTag ut =new UserTag();
+		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
+		// 通过标签得到推荐列表
+		for(UserTag userTag:temp) {
+			Tag t =new Tag();
+			t.setId(userTag.getTag());
+			recommendList.addAll(tagTagMapper.getDocumentListByTag(t));
+		}
+		// 去重
+		HashSet h = new HashSet(recommendList);
+		recommendList.clear();
+		recommendList.addAll(h);
+		h.clear();
+		
+		Document d = new Document();
+		d.setRecommendList(recommendList);
+		
+		return d;
+	}
+
+
+	@Override
+	public Course getRecommendCourseList(User user) {
+		// TODO Auto-generated method stub
+		List<Course> recommendList = new ArrayList<>();
+		
+		// 先得到用户接触过的标签列表
+		UserTag ut =new UserTag();
+		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
+		// 通过标签得到推荐列表
+		for(UserTag userTag:temp) {
+			Tag t =new Tag();
+			t.setId(userTag.getTag());
+			recommendList.addAll(tagTagMapper.getCourseListByTag(t));
+		}
+		// 去重
+		HashSet h = new HashSet(recommendList);
+		recommendList.clear();
+		recommendList.addAll(h);
+		h.clear();
+		
+		Course c = new Course();
+		c.setRecommendList(recommendList);
+		
+		return c;
+	}
+
+
+	@Override
+	public Book getRecommendBookList(User user) {
+		// TODO Auto-generated method stub
+		List<Book> recommendList = new ArrayList<>();
+		
+		// 先得到用户接触过的标签列表
+		UserTag ut =new UserTag();
+		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
+		// 通过标签得到推荐列表
+		for(UserTag userTag:temp) {
+			Tag t =new Tag();
+			t.setId(userTag.getTag());
+			recommendList.addAll(tagTagMapper.getBookListByTag(t));
+		}
+		// 去重
+		HashSet h = new HashSet(recommendList);
+		recommendList.clear();
+		recommendList.addAll(h);
+		h.clear();
+		
+		Book b = new Book();
+		b.setRecommendList(recommendList);
+		
+		return b;
 	}
 
 

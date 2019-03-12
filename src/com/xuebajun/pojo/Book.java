@@ -17,6 +17,9 @@ public class Book {
 	// 搜索功能
 	private List<Book> bookList;
 
+	// 推荐功能--猜你喜欢
+	private List<Book> recommendList;
+		
 	public int getId() {
 		return Id;
 	}
@@ -123,4 +126,12 @@ public class Book {
 	        Book b = (Book)x;
 	        return this.Id == b.Id;
 	    }
+
+		public List<Book> getRecommendList() {
+			return recommendList;
+		}
+
+		public void setRecommendList(List<Book> recommendList) {
+			this.recommendList = recommendList;
+		}
 }

@@ -21,5 +21,12 @@
 			update t_user_tag set times = times+10 where user=#{user} and tag=#{tag};
 		</update>
 		
+		<!-- 推荐功能：查找某用户喜欢接触的标签 -->
+		<select id="getUserTagByUser" parameterType="UserTag" resultType="UserTag">
+	    	select *
+			from t_user_tag
+			where user=#{user} order by times DESC;
+	    </select>
+	   
 		
 	</mapper>

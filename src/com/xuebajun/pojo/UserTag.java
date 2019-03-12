@@ -7,7 +7,7 @@ public class UserTag {
 	private int tag;
 	private int times;
 	
-	// 兴趣推荐
+	// 兴趣推荐 -此处结构只作为返回前端的载体，具体实现则位于RecommendService
 	private List<Document> recommendDocumentList;
 	private List<Course> recommendCourseList;
 	private List<Book> recommendBookList;
