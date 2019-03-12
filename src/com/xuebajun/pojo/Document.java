@@ -21,6 +21,8 @@ public class Document {
 	// 搜索功能
 	private List<Document> documentList;
 	
+	// 对应标签序列
+	private List<Tag> tagList;
 	
 	public int getId() {
 		return Id;
@@ -107,5 +109,11 @@ public class Document {
 	        Document d = (Document)x;
 	        return this.Id == d.Id;
 	    }
+		public List<Tag> getTagList() {
+			return tagList;
+		}
+		public void setTagList(List<Tag> tagList) {
+			this.tagList = tagList;
+		}
 
 }

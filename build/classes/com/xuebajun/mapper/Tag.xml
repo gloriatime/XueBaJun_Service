@@ -13,6 +13,16 @@
 			delete from t_tag where Id=#{Id};
 		</delete>
 		
+		<!-- 模糊查询需要的标签 -->
+		<select id="select" parameterType="Tag">
+			select * from t_tag where name like '%${name}%';
+		</select>
+		
+		<!-- 增加标签引用次数 -->
+		<update id="pulsOnetoTimes" parameterType="Tag">
+			update t_tag set times = times+1 where Id = #{Id};
+		</update>
+		
 		<!-- 通过类别找引用次数最多的10个tag -->
 		<select id="getTagListByType" parameterType="Tag" resultType="Tag">
 			select * from t_tag where type=#{type} order by times DESC limit 5;

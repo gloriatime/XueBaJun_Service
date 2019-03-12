@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.UserTagMapper">
+		<insert id="add" parameterType="UserTag">
+			insert into t_user_tag(user,tag,times) values(#{user},#{tag},#{times});
+		</insert>
+		
+		<select id="getUserTag" parameterType="UserTag">
+			select * from t_user_tag where user=#{user} and tag=#{tag};
+		</select>
+		
+		<!-- 增加标签浏览次数 -->
+		<update id="pulsOnetoTimes" parameterType="UserTag">
+			update t_user_tag set times = times+1 where user=#{user} and tag=#{tag};
+		</update>
+		
+		<update id="pulsTentoTimes" parameterType="UserTag">
+			update t_user_tag set times = times+10 where user=#{user} and tag=#{tag};
+		</update>
+		
+		
+	</mapper>

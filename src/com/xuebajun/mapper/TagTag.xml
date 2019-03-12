@@ -9,9 +9,14 @@
 		</insert>
 		
 		
-		<delete id="delete" parameterType="Tag">
+		<delete id="delete" parameterType="TagTag">
 			delete from t_tag_tag where Id=#{Id};
 		</delete>
+		
+		<delete id="deleteByBelong" parameterType="TagTag">
+			delete from t_tag_tag where belong=#{belong} and type=#{type};
+		</delete>
+		
 		
 		<!--  推荐系统：找到包含某tag的相关资源列表-->
 	    <select id="getDocumentListByTag" parameterType="Tag" resultType="Document">
@@ -25,7 +30,7 @@
 			where tag_tag.tag = #{Id} and tag_tag.type='course' and tag_tag.belong=course.Id;
 	    </select>
 	    <select id="getBookListByTag" parameterType="Tag" resultType="Book">
-	    	select book.Id,book.name
+	    	select book.Id,book.name,book.author
 			from t_tag_tag as tag_tag,t_book as book
 			where tag_tag.tag = #{Id} and tag_tag.type='book' and tag_tag.belong=book.Id;
 	    </select>

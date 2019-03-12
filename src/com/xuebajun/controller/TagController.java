@@ -12,17 +12,31 @@ import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.NewsService;
 import com.xuebajun.service.RecommendService;
+import com.xuebajun.service.TagService;
 
 @Controller
 @RequestMapping("")
-public class RecommendController {
+public class TagController {
 	
 	@Autowired
-	RecommendService recommendService;
+	TagService tagService;
 	
-	@RequestMapping("/GetRecommendListOfMainPage")
-    public @ResponseBody UserTag getRecommendListOfMainPage(@RequestBody User user) {
-		return recommendService.getRecommendList(user);
+	
+	// 模糊查询查找标签
+	@RequestMapping("/GetTagListByLike")
+    public @ResponseBody Tag getRecommendListOfMainPage(@RequestBody Tag tag) {
+		return tagService.getTagList(tag);
     }
 	
+	// 添加标签
+	@RequestMapping("/AddTag")
+	public void addTag(@RequestBody Tag tag) {
+		tagService.add(tag);
+	}
+	
+	// 添加标签引用次数
+	@RequestMapping("/PlusOneToTimes")
+	public void plusOneToTimes(@RequestBody Tag tag) {
+		 tagService.pulsOnetoTimes(tag);
+	}
 }
