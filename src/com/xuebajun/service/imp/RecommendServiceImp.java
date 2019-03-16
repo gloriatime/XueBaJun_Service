@@ -122,6 +122,7 @@ public class RecommendServiceImp implements RecommendService {
 		
 		// 先得到用户接触过的标签列表
 		UserTag ut =new UserTag();
+		ut.setUser(user.getPhone());
 		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
 		// 通过标签得到推荐列表
 		for(UserTag userTag:temp) {
@@ -149,6 +150,7 @@ public class RecommendServiceImp implements RecommendService {
 		
 		// 先得到用户接触过的标签列表
 		UserTag ut =new UserTag();
+		ut.setUser(user.getPhone());
 		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
 		// 通过标签得到推荐列表
 		for(UserTag userTag:temp) {
@@ -176,11 +178,13 @@ public class RecommendServiceImp implements RecommendService {
 		
 		// 先得到用户接触过的标签列表
 		UserTag ut =new UserTag();
+		ut.setUser(user.getPhone());
 		List<UserTag> temp = userTagMapper.getUserTagByUser(ut);
 		// 通过标签得到推荐列表
 		for(UserTag userTag:temp) {
 			Tag t =new Tag();
 			t.setId(userTag.getTag());
+			System.out.println("用户喜欢的标签Id："+t.getId());
 			recommendList.addAll(tagTagMapper.getBookListByTag(t));
 		}
 		// 去重

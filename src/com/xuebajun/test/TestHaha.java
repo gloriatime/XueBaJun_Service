@@ -287,6 +287,17 @@ public class TestHaha {
 		}
 	}
 	
+	@Test
+	public void testGetRecommendListOfBookPage() {
+		User u = new User();
+		u.setPhone("13061765432");
+		System.out.println("个性化推荐书籍列表：");
+		Book book = recommendService.getRecommendBookList(u);
+		for(Book b:book.getRecommendList()) {
+			System.out.println(b.getName()+b.getAuthor()+b.getId());
+		}
+	}
+	
 	@Test 
 	public void testTagSearch() {
 		Tag tag = new Tag();
