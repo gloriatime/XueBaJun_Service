@@ -37,11 +37,9 @@ public class CourseServiceImp implements CourseService {
 		Course temp = new Course();
 	
 		temp = courseMapper.getMyCommentList(course);
-		List<Comment> commentList = temp.getCommentList();
-		
-		course.setCommentList(commentList);
+		temp = courseMapper.getTagList(course);
 			
-		return course;
+		return temp;
 	}
 
 }

@@ -59,4 +59,25 @@
 			select Id,name from t_document order by Id DESC limit 1
 	    </select>
 	    
+	    <!-- 展示系统：得到标签列表 -->
+	     <resultMap type="Document" id="TagBean">
+	    	<id column="document_id" property="Id"/>
+	    	
+	    	<collection property="tagList" ofType="Tag">
+	    	
+	    		<id column="tag_Id" property="Id"/>
+	    		<result column="tag_name" property="name"/>
+	    		<result column="tag_type" property="type"/>
+	    		<result column="tag_times" property="times"/>
+	    	</collection>
+	    </resultMap>
+	    
+	     <select id="getTagList" resultMap="TagBean" parameterType="Document">
+	    	select tag.*,document.*,document.id "document_id",tag.Id "tag_Id",tag.name "tag_name",tag.type "tag_type",tag.times "tag_times"
+	    	from t_document document
+	    	left join t_tag_tag  tagtag on tagtag.belong = document.id and tagtag.type = "document"
+	    	left join t_tag tag on tag.Id = tagtag.tag
+	    	where document.id=#{Id};
+	    </select>
+	    
 	</mapper>

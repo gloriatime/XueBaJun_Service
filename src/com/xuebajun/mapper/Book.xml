@@ -64,5 +64,25 @@
 			order by heat DESC limit 20;
 	    </select>
 	    
+	    <!-- 展示系统：得到标签列表 -->
+	     <resultMap type="Book" id="TagBean">
+	    	<id column="book_id" property="Id"/>
+	    	
+	    	<collection property="tagList" ofType="Tag">
+	    	
+	    		<id column="tag_Id" property="Id"/>
+	    		<result column="tag_name" property="name"/>
+	    		<result column="tag_type" property="type"/>
+	    		<result column="tag_times" property="times"/>
+	    	</collection>
+	    </resultMap>
+	    
+	     <select id="getTagList" resultMap="TagBean" parameterType="Book">
+	    	select tag.*,book.*,book.id "book_id",tag.Id "tag_Id",tag.name "tag_name",tag.type "tag_type",tag.times "tag_times"
+	    	from t_book book
+	    	left join t_tag_tag  tagtag on tagtag.belong = book.id and tagtag.type = "book"
+	    	left join t_tag tag on tag.Id = tagtag.tag
+	    	where book.id=#{Id};
+	    </select>
 	    
 	</mapper>

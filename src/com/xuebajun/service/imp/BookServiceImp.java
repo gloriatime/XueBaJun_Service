@@ -39,10 +39,9 @@ public class BookServiceImp implements BookService {
 		book = bookMapper.getById(book);
 		Book temp = new Book();
 		temp = bookMapper.getMyCommentList(book);
+		temp = bookMapper.getTagList(book);
 		
-		book.setCommentList(temp.getCommentList());
-			
-		return book;
+		return temp;
 	}
 
 }

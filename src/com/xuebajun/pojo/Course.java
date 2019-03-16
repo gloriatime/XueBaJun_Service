@@ -14,6 +14,9 @@ public class Course {
 	// 所属评论列表
 	private List<Comment> commentList;
 	
+	// 对应标签序列
+	private List<Tag> tagList;
+	
 	// 搜索功能
 	private List<Course> courseList;
 	

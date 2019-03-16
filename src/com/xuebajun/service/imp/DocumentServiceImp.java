@@ -115,11 +115,11 @@ public class DocumentServiceImp implements DocumentService {
 		Document temp = new Document();
 	
 		temp = documentMapper.getMyCommentList(d);
-		List<Comment> commentList = temp.getCommentList();
 		
-		d.setCommentList(commentList);
+		temp = documentMapper.getTagList(d);
+		
 			
-		return d;
+		return temp;
 	}
 
 }

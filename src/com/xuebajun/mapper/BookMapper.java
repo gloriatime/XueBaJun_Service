@@ -12,6 +12,7 @@ public interface BookMapper {
 	public void delete(Book book);
 	public Book getById(Book book);
 	
+	public Book getTagList(Book book);
 	public Book getMyCommentList(Book book);
 	
 	public List<Book> searchBookList(Book book);
