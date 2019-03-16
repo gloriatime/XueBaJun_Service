@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="com.xuebajun.mapper.DocumentMapper">
-		<insert id="add" parameterType="Document">
+		<insert id="add" parameterType="Document" keyProperty="Id" useGeneratedKeys="true">
 			insert into t_document
 			(name,author,up_user,up_time,score,number,comment,download,url) 
 			values(#{name},#{author},#{up_user},#{up_time},#{score},#{number},#{comment},#{download},#{url});

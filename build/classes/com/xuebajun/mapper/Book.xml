@@ -32,7 +32,7 @@
 	    	</collection>
 	    </resultMap>
 	    
-	     <select id="getMyCommentList" resultMap="CourseBean" parameterType="Course">
+	     <select id="getMyCommentList" resultMap="BookBean" parameterType="Course">
 	    	select comment.*,book.*,book.Id "book_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong"
 	    	from t_book book
 	    	left join t_comment comment on comment.type='‘book’' and course.Id=comment.belong
@@ -50,7 +50,7 @@
 	    <select id="getTopOne" parameterType="TopDate" resultType="Book">
 	    	select book.Id,book.name,count(*)
 			from t_book as book, t_comment as comment
-			where date between #{begin} and #{end} and belong = book.Id and type='‘book’';
+			where date between #{begin} and #{end} and belong = book.Id and type='\'book\'';
 	    </select>
 	    <select id="getLastOne" resultType="Course">
 			select Id,name from t_book order by Id DESC limit 1
@@ -60,7 +60,7 @@
 	    <select id="getTopTwenty" parameterType="TopDate" resultType="Book">
 	    	select book.Id,book.name,count(*) as heat
 			from t_book as book, t_comment as comment
-			where date between #{begin} and #{end} and belong = book.Id and type='‘book’'
+			where date between #{begin} and #{end} and belong = book.Id and type='\'book\''
 			order by heat DESC limit 20;
 	    </select>
 	    

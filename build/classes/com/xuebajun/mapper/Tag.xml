@@ -5,7 +5,7 @@
 	
 	<mapper namespace="com.xuebajun.mapper.TagMapper">
 		<insert id="add" parameterType="Tag">
-			insert into t_tag(name,type,times) values(#{name},#{type},1);
+			insert into t_tag(name,type,times) values(#{name},#{type},0);
 		</insert>
 		
 		
@@ -14,7 +14,7 @@
 		</delete>
 		
 		<!-- 模糊查询需要的标签 -->
-		<select id="select" parameterType="Tag">
+		<select id="select" parameterType="Tag" resultType="Tag">
 			select * from t_tag where name like '%${name}%';
 		</select>
 		

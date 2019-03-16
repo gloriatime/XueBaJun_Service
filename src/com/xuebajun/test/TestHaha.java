@@ -1,5 +1,6 @@
 package com.xuebajun.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xuebajun.mapper.DocumentMapper;
 import com.xuebajun.mapper.UserMapper;
+import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.CollectBook;
 import com.xuebajun.pojo.CollectCourse;
 import com.xuebajun.pojo.CollectDocument;
@@ -19,6 +21,7 @@ import com.xuebajun.pojo.Concern;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
+import com.xuebajun.pojo.Tag;
 import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.AboutMeService;
@@ -26,6 +29,7 @@ import com.xuebajun.service.CommentService;
 import com.xuebajun.service.DocumentService;
 import com.xuebajun.service.RecommendService;
 import com.xuebajun.service.SearchService;
+import com.xuebajun.service.TagService;
 import com.xuebajun.service.TopService;
 import com.xuebajun.service.UserService;
 
@@ -49,6 +53,8 @@ public class TestHaha {
 	private TopService topService;
 	@Autowired
 	private RecommendService recommendService;
+	@Autowired
+	private TagService tagService;
 	
 	@Test
 	public void testAdd() {
@@ -154,7 +160,8 @@ public class TestHaha {
 			for(Comment c:myComment) {
 				System.out.println("  "+c.getContent());
 				System.out.println("    TO: "+c.getType());
-				System.out.println("    	NAME: "+c.getDocument().getName());
+				// 测试给资料的评价，如果评价了其他的类别需要改变方法
+				//System.out.println("    	NAME: "+c.getDocument().getName());
 			}
 	}
 	
@@ -174,10 +181,21 @@ public class TestHaha {
 	public void testAddDocument() {
 		Document d = new Document();
 		d.setUp_user("13061765432");
-		d.setName("《巍无羡漫画头像》");
-		d.setAuthor("清明");
+		d.setName("测试用文件2");
+		d.setAuthor("撸代码君2");
 		d.setUp_time(new Date());
 		d.setUrl("document/test.jpg");
+		
+		// 添加文件标签
+		List<Tag> tagList = new ArrayList<>();
+		Tag tag1 = new Tag();
+		Tag tag2 = new Tag();
+		tag1.setId(13);
+		tagList.add(tag1);
+		tag2.setId(14);
+		tagList.add(tag2);
+		d.setTagList(tagList);
+		
 		//documentService.add(d);
 		
 	}
@@ -186,7 +204,7 @@ public class TestHaha {
 	public void testDeleteDocument() {
 		// 只能删除存在的列，否则报错
 		Document d = new Document();
-		//d.setId(2);
+		d.setId(57);
 		//documentService.delete(d);
 		
 	}
@@ -254,7 +272,42 @@ public class TestHaha {
 		for(Course c:courses) {
 			System.out.println(" "+c.getName());
 		}
-		
+	}
+	
+	@Test
+	public void testGetTopTwenty() {
+		Book book = topService.getTopTwentyBook();
+		List<Book> bookList = book.getTopTwentyList();
+		System.out.println("热门20书籍：");
+		for(Book b:bookList) {
+			System.out.println(" "+b.getName());
+		}
+	}
+	
+	@Test 
+	public void testTagSearch() {
+		Tag tag = new Tag();
+		tag.setName("数");
+		tag = tagService.getTagList(tag);
+		System.out.println("模糊查询标签：");
+		for(Tag t:tag.getTagList()) {
+			System.out.println(t.getName());
+		}
+	}
+	
+	@Test 
+	public void testTagPlusTimes() {
+		Tag tag = new Tag();
+		tag.setId(6);
+		tagService.pulsOnetoTimes(tag);
+	}
+	
+	@Test 
+	public void testAddTag() {
+		Tag tag = new Tag();
+		tag.setName("测试用标签");
+		tag.setType("all");
+		//tagService.add(tag);
 	}
 }
 

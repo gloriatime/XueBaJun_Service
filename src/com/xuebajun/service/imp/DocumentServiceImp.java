@@ -43,7 +43,9 @@ public class DocumentServiceImp implements DocumentService {
 	@Override
 	public void add(Document d) {
 		// TODO Auto-generated method stub
+		// 需要获取d的Id才能为其贴标签
 		documentMapper.add(d);
+		System.out.println("document插入后自增Id返回："+d.getId());
 		
 		TagTag tt = new TagTag();
 		tt.setBelong(d.getId());

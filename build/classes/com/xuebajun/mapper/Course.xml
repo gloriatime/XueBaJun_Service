@@ -50,7 +50,7 @@
 	    <select id="getTopOne" parameterType="TopDate" resultType="Course">
 	    	select course.Id,course.name,count(*) as heat
 			from t_course as course, t_comment as comment
-			where date between #{begin} and #{end} and belong = course.Id and type='‘course’'
+			where date between #{begin} and #{end} and belong = course.Id and type='/'course/''
 			order by heat DESC limit 1;
 	    </select>
 	    <select id="getLastOne" resultType="Course">
@@ -61,7 +61,7 @@
 	    <select id="getTopTwenty" parameterType="TopDate" resultType="Course">
 	    	select course.Id,course.name,count(*) as heat
 			from t_course as course, t_comment as comment
-			where date between #{begin} and #{end} and belong = course.Id and type='‘course’'
+			where date between #{begin} and #{end} and belong = course.Id and type='/'course/''
 			order by heat DESC limit 20;
 	    </select>
 	    
