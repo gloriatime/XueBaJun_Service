@@ -10,6 +10,7 @@ import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
+import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.Tag;
 import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
@@ -17,6 +18,7 @@ import com.xuebajun.service.BookService;
 import com.xuebajun.service.CourseService;
 import com.xuebajun.service.DocumentService;
 import com.xuebajun.service.NewsService;
+import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.RecommendService;
 import com.xuebajun.service.TagService;
 
@@ -31,6 +33,8 @@ public class ShowInfoController {
     CourseService courseService;
 	@Autowired
     DocumentService documentService;
+	@Autowired
+    ProfessorService professorService;
 	
 	@RequestMapping("/GetDocument")
     public @ResponseBody Document getDocument(@RequestBody Document document) {
@@ -45,6 +49,11 @@ public class ShowInfoController {
 	@RequestMapping("/GetBook")
     public @ResponseBody Book getBook(@RequestBody Book book) {
        return bookService.getById(book);
+    }
+	
+	@RequestMapping("/GetProfessor")
+    public @ResponseBody Professor getProfessor(@RequestBody Professor professor) {
+       return professorService.getById(professor);
     }
 
 }

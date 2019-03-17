@@ -43,7 +43,10 @@ public class CourseServiceImp implements CourseService {
 		temp = courseMapper.getTagList(course);
 		if(temp.getTagList()!=null) {
 			course.setTagList(temp.getTagList());
-		}		
+		}
+		
+		temp = courseMapper.getProfessorCourseList(course);
+		course.setProfessorCourseList(temp.getProfessorCourseList());
 						
 		return course;
 	}

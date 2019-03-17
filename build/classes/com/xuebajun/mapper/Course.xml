@@ -13,7 +13,7 @@
 			delete from t_course where Id=#{Id};
 		</delete>
 		
-		
+		<!-- 课程对应教材 -->
 		<resultMap type="Course" id="Bean">
 	    	<id column="course_Id" property="Id"/>
 	    	<result column="course.name" property="name"/>
@@ -37,6 +37,27 @@
 			where course.Id = #{Id};
 		</select>
 		
+		<!-- 课程对应教师关系列表 -->
+		<resultMap type="Course" id="ProfessorBean">
+	    	<id column="Course_Id" property="Id"/>
+	    	
+	    	<collection property="professorCourseList" ofType="ProfessorCourse">
+	    	
+	    		<association property="professor" javaType="Professor">
+	    			<id column="professor_Id" property="Id"/>
+	    			<result column="professor_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    <select id="getProfessorCourseList" resultMap="ProfessorBean" parameterType="Course">
+	    	select professor.*,course.*,course.Id "course_Id",professor.Id "professor_Id",professor.name "professor_name"
+	    	from t_course course
+	    	left join t_professor_course on course = course.Id
+	    	left join t_professor professor on professor = professor.Id
+	    	where course.Id = #{Id};
+	    </select>
+	    
 		<!-- 查看评论功能：得到评论列表 -->
 		 <resultMap type="Course" id="CourseBean">
 	    	<id column="course_id" property="Id"/>

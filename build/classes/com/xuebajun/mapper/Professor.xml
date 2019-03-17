@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.xuebajun.mapper.ProfessorMapper">
+		<insert id="add" parameterType="Professor">
+			insert into t_professor(name,intro,filed,pic) values(#{name},#{intro},#{filed},#{pic});
+		</insert>
+		
+		
+		<delete id="delete" parameterType="Professor">
+			delete from t_professor where Id=#{Id};
+		</delete>
+		
+		<select id="getById" parameterType="Professor" resultType="Professor">
+			select * from t_professor where Id=#{Id}
+		</select>
+		
+		<!-- 教师关联课程 -->
+		<resultMap type="Professor" id="CourseBean">
+	    	<id column="professor_Id" property="Id"/>
+	    	
+	    	<collection property="professorCourseList" ofType="ProfessorCourse">
+	    	
+	    		<association property="course" javaType="Course">
+	    			<id column="course_Id" property="Id"/>
+	    			<result column="course_name" property="name"/>
+	    		</association>
+	    		
+	    	</collection>
+	    </resultMap>
+	    <select id="getProfessorCourseList" resultMap="CourseBean" parameterType="Professor">
+	    	select professor.*,course.*,professor.Id "professor_Id",course.Id "course_Id",course.name "course_name"
+	    	from t_professor professor
+	    	left join t_professor_course on professor = professor.Id
+	    	left join t_course course on course = course.Id
+	    	where professor.Id = #{Id};
+	    </select>
+	    
+	</mapper>
+	

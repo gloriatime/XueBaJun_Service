@@ -18,6 +18,9 @@ public class Course {
 	// 对应标签序列
 	private List<Tag> tagList;
 	
+	// 对应教师关系列表
+	private List<ProfessorCourse> professorCourseList;
+	
 	// 搜索功能
 	private List<Course> courseList;
 	
@@ -117,6 +120,12 @@ public class Course {
 	}
 	public void setTagList(List<Tag> tagList) {
 		this.tagList = tagList;
+	}
+	public List<ProfessorCourse> getProfessorCourseList() {
+		return professorCourseList;
+	}
+	public void setProfessorCourseList(List<ProfessorCourse> professorCourseList) {
+		this.professorCourseList = professorCourseList;
 	}
 
 }

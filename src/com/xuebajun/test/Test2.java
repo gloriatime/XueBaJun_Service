@@ -8,9 +8,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Course;
+import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.Tag;
 import com.xuebajun.service.BookService;
 import com.xuebajun.service.CourseService;
+import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.TagService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,6 +23,8 @@ public class Test2 {
 	private CourseService courseService;
 	@Autowired
 	private BookService bookService;
+	@Autowired
+    ProfessorService professorService;
 	
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
@@ -30,6 +34,7 @@ public class Test2 {
 		System.out.println("课程信息：");
 		System.out.println("返回课程信息："+course.getName());
 		System.out.println("相关书籍信息："+course.getBook().getName());
+		System.out.println("相关教师信息："+course.getProfessorCourseList().get(0).getProfessor().getName());
 	}
 	
 	@Test (timeout = 1000)
@@ -40,6 +45,16 @@ public class Test2 {
 		System.out.println("书籍信息：");
 		System.out.println("返回书籍信息："+book.getName());
 		System.out.println("相关课程信息："+book.getCourse().getName());
+	}
+	
+	@Test (timeout = 1000)
+	public void testGetProfessorById() {
+		Professor p = new Professor();
+		p.setId(1);
+		p = professorService.getById(p);
+		System.out.println("教师信息：");
+		System.out.println("返回教师信息："+p.getIntro());
+		System.out.println("相关课程信息："+p.getProfessorCourseList().get(0).getCourse().getName());
 	}
 
 }
