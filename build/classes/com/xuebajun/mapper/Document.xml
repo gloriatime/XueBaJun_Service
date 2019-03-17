@@ -37,7 +37,7 @@
 	     <select id="getMyCommentList" resultMap="DocumentBean" parameterType="Document">
 	    	select comment.*,document.*,document.id "document_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong"
 	    	from t_document document
-	    	left join t_comment comment on comment.type='‘document’' and document.id=comment.belong
+	    	left join t_comment comment on comment.type='document' and document.id=comment.belong
 	    	where document.id=#{Id};
 	    </select>
 	    
@@ -53,7 +53,7 @@
 	    <select id="getTopOne" parameterType="TopDate" resultType="Document">
 	    	select document.Id,document.name,count(*)
 			from t_document as document, t_comment as comment
-			where date between #{begin} and #{end} and belong = document.Id and type='‘document’';
+			where date between #{begin} and #{end} and belong = document.Id and type='document';
 	    </select>
 	    <select id="getLastOne" resultType="Document">
 			select Id,name from t_document order by Id DESC limit 1
@@ -75,7 +75,7 @@
 	     <select id="getTagList" resultMap="TagBean" parameterType="Document">
 	    	select tag.*,document.*,document.id "document_id",tag.Id "tag_Id",tag.name "tag_name",tag.type "tag_type",tag.times "tag_times"
 	    	from t_document document
-	    	left join t_tag_tag  tagtag on tagtag.belong = document.id and tagtag.type = "document"
+	    	left join t_tag_tag  tagtag on tagtag.belong = document.id and tagtag.type = 'document'
 	    	left join t_tag tag on tag.Id = tagtag.tag
 	    	where document.id=#{Id};
 	    </select>

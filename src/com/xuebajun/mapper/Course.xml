@@ -15,19 +15,25 @@
 		
 		
 		<resultMap type="Course" id="Bean">
-	    	<id column="course_id" property="Id"/>
+	    	<id column="course_Id" property="Id"/>
+	    	<result column="course.name" property="name"/>
+	    	<result column="course.term" property="term"/>
+	    	<result column="course.intro" property="intro"/>
+	    	<result column="course.score" property="score"/>
+	    	<result column="course.number" property="number"/>
+	    	<result column="course.comment" property="comment"/>
 	    	
 	    	<association property="book" javaType="Book">
 	    			<id column="book_Id" property="Id"/>
 	    			<result column="book_name" property="name"/>
-	    		</association>
+	    	</association>
 	    		
 	    </resultMap>
 		
-		<select id="getById" parameterType="Course" resultType="Bean">
-			select course.*,book.*, course.id "course_id",book.id "book_id", book.name "book_name"
+		<select id="getById" parameterType="Course" resultMap="Bean">
+			select course.*,book.*, course.Id "course_Id",course.name "course.name",course.term "course.term",course.intro "course.intro", course.score "course.score" ,course.number "course.number",course.comment "course.comment",book.Id "book_Id", book.name "book_name"
 			from t_course course
-			left join t_book book on course.book = book.id
+			left join t_book book on course.book = book.Id
 			where course.Id = #{Id};
 		</select>
 		
@@ -64,7 +70,7 @@
 	    <select id="getTopOne" parameterType="TopDate" resultType="Course">
 	    	select course.Id,course.name,count(*) as heat
 			from t_course as course, t_comment as comment
-			where date between #{begin} and #{end} and belong = course.Id and type='/'course/''
+			where date between #{begin} and #{end} and belong = course.Id and type='course'
 			order by heat DESC limit 1;
 	    </select>
 	    <select id="getLastOne" resultType="Course">
@@ -75,7 +81,7 @@
 	    <select id="getTopTwenty" parameterType="TopDate" resultType="Course">
 	    	select course.Id,course.name,count(*) as heat
 			from t_course as course, t_comment as comment
-			where date between #{begin} and #{end} and belong = course.Id and type='/'course/''
+			where date between #{begin} and #{end} and belong = course.Id and type='course'
 			order by heat DESC limit 20;
 	    </select>
 	    
@@ -95,7 +101,7 @@
 	     <select id="getTagList" resultMap="TagBean" parameterType="Course">
 	    	select tag.*,course.*,course.id "course_id",tag.Id "tag_Id",tag.name "tag_name",tag.type "tag_type",tag.times "tag_times"
 	    	from t_course course
-	    	left join t_tag_tag  tagtag on tagtag.belong = course.id and tagtag.type = "course"
+	    	left join t_tag_tag  tagtag on tagtag.belong = course.id and tagtag.type = 'course'
 	    	left join t_tag tag on tag.Id = tagtag.tag
 	    	where course.id=#{Id};
 	    </select>

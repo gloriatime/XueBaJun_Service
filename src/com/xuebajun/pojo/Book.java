@@ -13,6 +13,7 @@ public class Book {
 	private int comment;
 	private int download;
 	private String cover;
+	private Course course;
 	
 	// 所属评论列表
 	private List<Comment> commentList;
@@ -158,5 +159,21 @@ public class Book {
 
 		public void setCommentList(List<Comment> commentList) {
 			this.commentList = commentList;
+		}
+
+		public List<Tag> getTagList() {
+			return tagList;
+		}
+
+		public void setTagList(List<Tag> tagList) {
+			this.tagList = tagList;
+		}
+
+		public Course getCourse() {
+			return course;
+		}
+
+		public void setCourse(Course course) {
+			this.course = course;
 		}
 }

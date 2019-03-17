@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.xuebajun.mapper.BookMapper;
 import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Comment;
+import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.service.BookService;
 import com.xuebajun.service.CommentService;
@@ -41,7 +42,13 @@ public class BookServiceImp implements BookService {
 		temp = bookMapper.getMyCommentList(book);
 		temp = bookMapper.getTagList(book);
 		
-		return temp;
+		Course c  = new Course();
+		c = bookMapper.getRelatedCourse(book);
+		book.setCourse(c);
+		book.setCommentList(temp.getCommentList());
+		book.setTagList(temp.getTagList());
+		
+		return book;
 	}
 
 }

@@ -16,6 +16,13 @@
 		<select id="getById" parameterType="Book" resultType="Book">
 			select * from t_book where Id=#{Id}
 		</select>
+	
+		
+		<select id="getRelatedCourse" parameterType="Book" resultType="Course">
+			select *
+			from t_course course
+			where course.book = #{Id};
+		</select>
 		
 		<!-- 查看评论功能：得到评论列表 -->
 		 <resultMap type="Book" id="BookBean">
@@ -32,10 +39,10 @@
 	    	</collection>
 	    </resultMap>
 	    
-	     <select id="getMyCommentList" resultMap="BookBean" parameterType="Course">
+	     <select id="getMyCommentList" resultMap="BookBean" parameterType="Book">
 	    	select comment.*,book.*,book.Id "book_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong"
 	    	from t_book book
-	    	left join t_comment comment on comment.type='‘book’' and course.Id=comment.belong
+	    	left join t_comment comment on comment.type='book' and book.Id=comment.belong
 	    	where book.Id=#{Id};
 	    </select>
 		
@@ -50,7 +57,7 @@
 	    <select id="getTopOne" parameterType="TopDate" resultType="Book">
 	    	select book.Id,book.name,count(*)
 			from t_book as book, t_comment as comment
-			where date between #{begin} and #{end} and belong = book.Id and type='\'book\'';
+			where date between #{begin} and #{end} and belong = book.Id and type='book';
 	    </select>
 	    <select id="getLastOne" resultType="Course">
 			select Id,name from t_book order by Id DESC limit 1
@@ -60,7 +67,7 @@
 	    <select id="getTopTwenty" parameterType="TopDate" resultType="Book">
 	    	select book.Id,book.name,count(*) as heat
 			from t_book as book, t_comment as comment
-			where date between #{begin} and #{end} and belong = book.Id and type='\'book\''
+			where date between #{begin} and #{end} and belong = book.Id and type='book'
 			order by heat DESC limit 20;
 	    </select>
 	    
@@ -80,7 +87,7 @@
 	     <select id="getTagList" resultMap="TagBean" parameterType="Book">
 	    	select tag.*,book.*,book.id "book_id",tag.Id "tag_Id",tag.name "tag_name",tag.type "tag_type",tag.times "tag_times"
 	    	from t_book book
-	    	left join t_tag_tag  tagtag on tagtag.belong = book.id and tagtag.type = "book"
+	    	left join t_tag_tag  tagtag on tagtag.belong = book.id and tagtag.type = 'book'
 	    	left join t_tag tag on tag.Id = tagtag.tag
 	    	where book.id=#{Id};
 	    </select>

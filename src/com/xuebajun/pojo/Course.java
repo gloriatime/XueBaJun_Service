@@ -112,5 +112,11 @@ public class Course {
 	public void setBook(Book book) {
 		this.book = book;
 	}
+	public List<Tag> getTagList() {
+		return tagList;
+	}
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
+	}
 
 }

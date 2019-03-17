@@ -56,7 +56,7 @@ public class TestHaha {
 	@Autowired
 	private TagService tagService;
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testAdd() {
 		User u = new User();
 		//u.setName("头牌");
@@ -69,7 +69,7 @@ public class TestHaha {
 		//userService.addUser(u);
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyConcernList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -82,7 +82,7 @@ public class TestHaha {
 			}
 		
 	}
-	@Test
+	@Test(timeout = 1000)
 	public void testGetConcernMeList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -96,7 +96,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyCollectedDocumentsList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -110,7 +110,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyCollectedBooksList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -124,7 +124,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyCollectedCoursesList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -138,7 +138,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMydocumentList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -150,7 +150,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyCommentList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -165,7 +165,7 @@ public class TestHaha {
 			}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetMyNewsList() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -177,7 +177,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testAddDocument() {
 		Document d = new Document();
 		d.setUp_user("13061765432");
@@ -200,7 +200,7 @@ public class TestHaha {
 		
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	public void testDeleteDocument() {
 		// 只能删除存在的列，否则报错
 		Document d = new Document();
@@ -209,7 +209,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void ChangeComment() {
 		Comment c = new Comment();
 		c.setId(5);
@@ -217,7 +217,7 @@ public class TestHaha {
 		commentService.change(c);	
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void SelectDocumentById() {
 		Document d = new Document();
 		d.setId(56);
@@ -233,7 +233,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testSearch() {
 		Course c = new Course();
 		c.setName("数");		
@@ -246,7 +246,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetTopOne() {
 		Document d = new Document();
 		d = topService.getTopDocument();
@@ -256,7 +256,7 @@ public class TestHaha {
 		
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetRecommendListOfMainPage() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -277,7 +277,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetTopTwenty() {
 		Book book = topService.getTopTwentyBook();
 		List<Book> bookList = book.getTopTwentyList();
@@ -287,7 +287,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test
+	@Test(timeout = 1000)
 	public void testGetRecommendListOfBookPage() {
 		User u = new User();
 		u.setPhone("13061765432");
@@ -298,7 +298,7 @@ public class TestHaha {
 		}
 	}
 	
-	@Test 
+	@Test (timeout = 1000)
 	public void testTagSearch() {
 		Tag tag = new Tag();
 		tag.setName("数");
@@ -309,14 +309,14 @@ public class TestHaha {
 		}
 	}
 	
-	@Test 
+	@Test (timeout = 1000)
 	public void testTagPlusTimes() {
 		Tag tag = new Tag();
 		tag.setId(6);
 		tagService.pulsOnetoTimes(tag);
 	}
 	
-	@Test 
+	@Test (timeout = 1000)
 	public void testAddTag() {
 		Tag tag = new Tag();
 		tag.setName("测试用标签");
@@ -324,4 +324,3 @@ public class TestHaha {
 		//tagService.add(tag);
 	}
 }
-

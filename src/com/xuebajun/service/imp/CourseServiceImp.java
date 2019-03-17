@@ -34,12 +34,18 @@ public class CourseServiceImp implements CourseService {
 	public Course getById(Course course) {
 		// TODO Auto-generated method stub
 		course = courseMapper.getById(course);
+		System.out.println("返回课程信息："+course.getName());
 		Course temp = new Course();
 	
 		temp = courseMapper.getMyCommentList(course);
+		course.setCommentList(temp.getCommentList());
+		
 		temp = courseMapper.getTagList(course);
-			
-		return temp;
+		if(temp.getTagList()!=null) {
+			course.setTagList(temp.getTagList());
+		}		
+						
+		return course;
 	}
 
 }
