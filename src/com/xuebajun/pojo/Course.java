@@ -10,6 +10,7 @@ public class Course {
 	private float score;
 	private int number;
 	private int comment;
+	private Book book;
 	
 	// 所属评论列表
 	private List<Comment> commentList;
@@ -104,6 +105,12 @@ public class Course {
 	}
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 }

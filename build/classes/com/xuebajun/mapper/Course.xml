@@ -13,8 +13,22 @@
 			delete from t_course where Id=#{Id};
 		</delete>
 		
-		<select id="getById" parameterType="Course" resultType="Course">
-			select * from t_course where Id=#{Id}
+		
+		<resultMap type="Course" id="Bean">
+	    	<id column="course_id" property="Id"/>
+	    	
+	    	<association property="book" javaType="Book">
+	    			<id column="book_Id" property="Id"/>
+	    			<result column="book_name" property="name"/>
+	    		</association>
+	    		
+	    </resultMap>
+		
+		<select id="getById" parameterType="Course" resultType="Bean">
+			select course.*,book.*, course.id "course_id",book.id "book_id", book.name "book_name"
+			from t_course course
+			left join t_book book on course.book = book.id
+			where course.Id = #{Id};
 		</select>
 		
 		<!-- 查看评论功能：得到评论列表 -->
