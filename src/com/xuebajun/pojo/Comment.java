@@ -9,12 +9,13 @@ public class Comment {
 	private Date date;
 	private String type;
 	private int belong;
-	// 暂时不知道comment是对什么的评论
 	private String Content;
-	private Document document;
+	
+	// 我的评论中需要显示所评论体
 	private Book book;
 	private Course course;
-	// 还有一个teacher。
+	private Document document;
+	private Professor professor;
 	
 	// 从属的回复列表
 	private List<Reply> replyList;
@@ -43,24 +44,6 @@ public class Comment {
 	public void setContent(String content) {
 		Content = content;
 	}
-	public Document getDocument() {
-		return document;
-	}
-	public void setDocument(Document document) {
-		this.document = document;
-	}
-	public Book getBook() {
-		return book;
-	}
-	public void setBook(Book book) {
-		this.book = book;
-	}
-	public Course getCourse() {
-		return course;
-	}
-	public void setCourse(Course course) {
-		this.course = course;
-	}
 	public String getType() {
 		return type;
 	}
@@ -78,5 +61,29 @@ public class Comment {
 	}
 	public void setReplyList(List<Reply> replyList) {
 		this.replyList = replyList;
+	}
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	public Document getDocument() {
+		return document;
+	}
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+	public Professor getProfessor() {
+		return professor;
+	}
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 }

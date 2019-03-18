@@ -74,4 +74,10 @@ public class CommentServiceImp implements CommentService {
 		comment.setReplyList(commentMapper.getMyReplyList(comment));
 		return comment;
 	}
+
+	@Override
+	public void addReply(Reply r) {
+		// TODO Auto-generated method stub
+		replyMapper.add(r);
+	}
 }

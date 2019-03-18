@@ -6,15 +6,7 @@
 	<mapper namespace="com.xuebajun.mapper.CommentMapper">
 		<insert id="add" parameterType="Comment">
 			insert into t_comment(critic,reply,date,content,type,belong)
-			<if test="document!=null">
-				values(#{critic.phone},#{reply},#{date},#{content},'document',#{document.Id});		
-			</if>
-			<if test="book!=null">
-				values(#{critic.phone},#{reply},#{date},#{content},'book',#{book.Id});
-			</if>
-			<if test="course!=null">
-				values(#{critic.phone},#{reply},#{date},#{content},'course',#{course.Id});
-			</if>
+			values(#{critic.phone},#{reply},#{date},#{content},#{type},#{belong});
 		</insert>
 		
 		
