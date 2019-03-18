@@ -15,6 +15,10 @@ public class Document {
 	private int download;
 	private String url;
 	
+	
+	// 申请查看用户
+	private String applicant;
+	
 	// 所属评论列表
 	private List<Comment> commentList;
 	
@@ -123,6 +127,12 @@ public class Document {
 		}
 		public void setRecommendList(List<Document> recommendList) {
 			this.recommendList = recommendList;
+		}
+		public String getApplicant() {
+			return applicant;
+		}
+		public void setApplicant(String applicant) {
+			this.applicant = applicant;
 		}
 
 }

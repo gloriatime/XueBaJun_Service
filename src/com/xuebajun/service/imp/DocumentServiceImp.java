@@ -111,15 +111,32 @@ public class DocumentServiceImp implements DocumentService {
 	@Override
 	public Document selectById(Document d) {
 		// TODO Auto-generated method stub
+		
+		String applicant = d.getApplicant();
+		
 		d = documentMapper.getById(d);
 		Document temp = new Document();
 	
 		temp = documentMapper.getMyCommentList(d);
+		d.setCommentList(temp.getCommentList());
 		
 		temp = documentMapper.getTagList(d);
+		d.setTagList(temp.getTagList());
 		
+		// 为用户增加tag浏览次数
+		for(Tag t:d.getTagList()) {
+			UserTag ut = new UserTag();
+			ut.setUser(applicant);
+			ut.setTag(t.getId());
+			if(userTagMapper.getUserTag(ut)!=null) {
+				userTagMapper.pulsOnetoTimes(ut);
+			}else {
+				ut.setTimes(1);
+				userTagMapper.add(ut);
+			}
+		}
 			
-		return temp;
+		return d;
 	}
 
 }

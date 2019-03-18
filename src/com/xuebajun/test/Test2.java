@@ -30,6 +30,7 @@ public class Test2 {
 	public void testGetCourseById() {
 		Course course = new Course();
 		course.setId(3);
+		course.setApplicant("13061765432");
 		course = courseService.getById(course);
 		System.out.println("课程信息：");
 		System.out.println("返回课程信息："+course.getName());
@@ -56,6 +57,15 @@ public class Test2 {
 		System.out.println("返回教师信息："+p.getIntro());
 		System.out.println("相关课程信息："+p.getProfessorCourseList().get(0).getCourse().getName());
 		System.out.println("相关评论信息："+p.getCommentList().get(0).getContent());
+	}
+	
+	@Test (timeout = 1000)
+	public void testUserTag() {
+		Course course = new Course();
+		course.setId(3);
+		course.setApplicant("13061765432");
+		course = courseService.getById(course);
+		
 	}
 
 }

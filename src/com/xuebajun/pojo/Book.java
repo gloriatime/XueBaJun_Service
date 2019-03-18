@@ -15,6 +15,9 @@ public class Book {
 	private String cover;
 	private Course course;
 	
+	// 申请查看用户
+	private String applicant;
+	
 	// 所属评论列表
 	private List<Comment> commentList;
 	
@@ -175,5 +178,13 @@ public class Book {
 
 		public void setCourse(Course course) {
 			this.course = course;
+		}
+
+		public String getApplicant() {
+			return applicant;
+		}
+
+		public void setApplicant(String applicant) {
+			this.applicant = applicant;
 		}
 }

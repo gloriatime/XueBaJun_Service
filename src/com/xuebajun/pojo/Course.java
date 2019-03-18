@@ -12,6 +12,9 @@ public class Course {
 	private int comment;
 	private Book book;
 	
+	// 申请查看用户
+	private String applicant;
+	
 	// 所属评论列表
 	private List<Comment> commentList;
 	
@@ -126,6 +129,12 @@ public class Course {
 	}
 	public void setProfessorCourseList(List<ProfessorCourse> professorCourseList) {
 		this.professorCourseList = professorCourseList;
+	}
+	public String getApplicant() {
+		return applicant;
+	}
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
 	}
 
 }
