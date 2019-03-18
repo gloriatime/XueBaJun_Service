@@ -15,6 +15,9 @@ public class Professor {
 	// 教师教授课程关系列表
 	private List<ProfessorCourse> professorCourseList;
 	
+	// 所属评论列表
+	private List<Comment> commentList;
+		
 	public int getId() {
 		return Id;
 	}
@@ -68,5 +71,11 @@ public class Professor {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 }

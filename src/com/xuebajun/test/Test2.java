@@ -50,11 +50,12 @@ public class Test2 {
 	@Test (timeout = 1000)
 	public void testGetProfessorById() {
 		Professor p = new Professor();
-		p.setId(1);
+		p.setId(2);
 		p = professorService.getById(p);
 		System.out.println("教师信息：");
 		System.out.println("返回教师信息："+p.getIntro());
 		System.out.println("相关课程信息："+p.getProfessorCourseList().get(0).getCourse().getName());
+		System.out.println("相关评论信息："+p.getCommentList().get(0).getContent());
 	}
 
 }

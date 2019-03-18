@@ -15,9 +15,14 @@ public class ProfessorServiceImp implements ProfessorService {
 	@Override
 	public Professor getById(Professor p) {
 		// TODO Auto-generated method stub
+		// 获取基本信息
 		p = professorMapper.getById(p);
+		// 获取所教授课程
 		Professor temp = professorMapper.getProfessorCourseList(p);
 		p.setProfessorCourseList(temp.getProfessorCourseList());
+		// 获取相关评论
+		temp = professorMapper.getMyCommentList(p);
+		p.setCommentList(temp.getCommentList());
 		return p;
 	}
 

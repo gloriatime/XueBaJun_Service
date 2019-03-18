@@ -5,4 +5,5 @@ import com.xuebajun.pojo.Professor;
 public interface ProfessorMapper {
 	public Professor getProfessorCourseList(Professor p);
 	public Professor getById(Professor p);
+	public Professor getMyCommentList(Professor p);
 }
