@@ -12,4 +12,23 @@
 		<delete id="deleteMyConcern" parameterType="Concern">
 			delete from t_concern where user=#{user.phone} and my_concern=#{my_concern.phone};
 		</delete>
+		
+		 <resultMap type="Concern" id="ConcernBean">
+	    	
+	    	
+	    		<association property="user" javaType="User">
+	    			<id column="user_phone" property="phone"/>
+	    		</association>
+	    		
+	    		<association property="my_concern" javaType="User">
+	    			<id column="my_concern_phone" property="phone"/>
+	    		</association>
+	    		
+	    	
+	    </resultMap>
+		
+		<select id="hasConcerned" parameterType="Concern" resultMap="ConcernBean">
+			select concern.*, user "user_phone", my_concern "my_concern_phone"
+			from t_concern concern where user=#{user.phone} and my_concern=#{my_concern.phone};
+		</select>
 	</mapper>

@@ -27,7 +27,7 @@ public class ConcernServiceImp implements ConcernService {
 	@Override
 	public Concern HasConcerned(Concern concern) {
 		// TODO Auto-generated method stub
-		return concernMapper.HasConcerned(concern);
+		return concernMapper.hasConcerned(concern);
 	}
 
 }

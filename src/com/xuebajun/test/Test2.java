@@ -7,10 +7,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xuebajun.pojo.Book;
+import com.xuebajun.pojo.Concern;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.Tag;
+import com.xuebajun.pojo.User;
 import com.xuebajun.service.BookService;
+import com.xuebajun.service.ConcernService;
 import com.xuebajun.service.CourseService;
 import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.TagService;
@@ -25,6 +28,8 @@ public class Test2 {
 	private BookService bookService;
 	@Autowired
     ProfessorService professorService;
+	@Autowired
+	ConcernService concernService;
 	
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
@@ -38,7 +43,7 @@ public class Test2 {
 		System.out.println("相关教师信息："+course.getProfessorCourseList().get(0).getProfessor().getName());
 	}
 	
-	@Test (timeout = 1000)
+	@Test 
 	public void testGetBookById() {
 		Book book = new Book();
 		book.setId(3);
@@ -65,6 +70,25 @@ public class Test2 {
 		course.setId(3);
 		course.setApplicant("13061765432");
 		course = courseService.getById(course);
+		
+	}
+	
+	@Test (timeout = 1000)
+	public void testAddConcern() {
+		Concern c = new Concern();
+		User user = new User();
+		user.setPhone("18291024979");
+		User myconcern = new User();
+		myconcern.setPhone("13061765432");
+		c.setUser(user);
+		c.setMy_concern(myconcern);
+		Concern temp = new Concern();
+		temp = concernService.HasConcerned(c);
+		if(temp!=null) {
+			System.out.println("已存在该关系");
+		}else {
+			concernService.addConcern(c);
+		}
 		
 	}
 
