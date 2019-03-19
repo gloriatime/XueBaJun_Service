@@ -6,17 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.xuebajun.controller.CollectController;
 import com.xuebajun.pojo.Book;
+import com.xuebajun.pojo.CollectDocument;
 import com.xuebajun.pojo.Concern;
 import com.xuebajun.pojo.Course;
+import com.xuebajun.pojo.Document;
+import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.Tag;
 import com.xuebajun.pojo.User;
 import com.xuebajun.service.BookService;
+import com.xuebajun.service.CollectService;
 import com.xuebajun.service.ConcernService;
 import com.xuebajun.service.CourseService;
+import com.xuebajun.service.DocumentService;
+import com.xuebajun.service.NewsService;
 import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.TagService;
+import com.xuebajun.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -30,6 +38,14 @@ public class Test2 {
     ProfessorService professorService;
 	@Autowired
 	ConcernService concernService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	CollectService collectService;
+	@Autowired
+    DocumentService documentService;
+	@Autowired
+    NewsService newsService;
 	
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
@@ -37,10 +53,10 @@ public class Test2 {
 		course.setId(3);
 		course.setApplicant("13061765432");
 		course = courseService.getById(course);
-		System.out.println("¿Î³ÌĞÅÏ¢£º");
-		System.out.println("·µ»Ø¿Î³ÌĞÅÏ¢£º"+course.getName());
-		System.out.println("Ïà¹ØÊé¼®ĞÅÏ¢£º"+course.getBook().getName());
-		System.out.println("Ïà¹Ø½ÌÊ¦ĞÅÏ¢£º"+course.getProfessorCourseList().get(0).getProfessor().getName());
+		System.out.println("è¯¾ç¨‹ä¿¡æ¯ï¼š");
+		System.out.println("è¿”å›è¯¾ç¨‹ä¿¡æ¯ï¼š"+course.getName());
+		System.out.println("ç›¸å…³ä¹¦ç±ä¿¡æ¯ï¼š"+course.getBook().getName());
+		System.out.println("ç›¸å…³æ•™å¸ˆä¿¡æ¯ï¼š"+course.getProfessorCourseList().get(0).getProfessor().getName());
 	}
 	
 	@Test 
@@ -48,9 +64,9 @@ public class Test2 {
 		Book book = new Book();
 		book.setId(3);
 		book = bookService.getById(book);
-		System.out.println("Êé¼®ĞÅÏ¢£º");
-		System.out.println("·µ»ØÊé¼®ĞÅÏ¢£º"+book.getName());
-		System.out.println("Ïà¹Ø¿Î³ÌĞÅÏ¢£º"+book.getCourse().getName());
+		System.out.println("ä¹¦ç±ä¿¡æ¯ï¼š");
+		System.out.println("è¿”å›ä¹¦ç±ä¿¡æ¯ï¼š"+book.getName());
+		System.out.println("ç›¸å…³è¯¾ç¨‹ä¿¡æ¯ï¼š"+book.getCourse().getName());
 	}
 	
 	@Test (timeout = 1000)
@@ -58,10 +74,10 @@ public class Test2 {
 		Professor p = new Professor();
 		p.setId(2);
 		p = professorService.getById(p);
-		System.out.println("½ÌÊ¦ĞÅÏ¢£º");
-		System.out.println("·µ»Ø½ÌÊ¦ĞÅÏ¢£º"+p.getIntro());
-		System.out.println("Ïà¹Ø¿Î³ÌĞÅÏ¢£º"+p.getProfessorCourseList().get(0).getCourse().getName());
-		System.out.println("Ïà¹ØÆÀÂÛĞÅÏ¢£º"+p.getCommentList().get(0).getContent());
+		System.out.println("æ•™å¸ˆä¿¡æ¯ï¼š");
+		System.out.println("è¿”å›æ•™å¸ˆä¿¡æ¯ï¼š"+p.getIntro());
+		System.out.println("ç›¸å…³è¯¾ç¨‹ä¿¡æ¯ï¼š"+p.getProfessorCourseList().get(0).getCourse().getName());
+		System.out.println("ç›¸å…³è¯„è®ºä¿¡æ¯ï¼š"+p.getCommentList().get(0).getContent());
 	}
 	
 	@Test (timeout = 1000)
@@ -85,11 +101,35 @@ public class Test2 {
 		Concern temp = new Concern();
 		temp = concernService.HasConcerned(c);
 		if(temp!=null) {
-			System.out.println("ÒÑ´æÔÚ¸Ã¹ØÏµ");
+			System.out.println("å·²å­˜åœ¨è¯¥å…³ç³»");
 		}else {
 			concernService.addConcern(c);
 		}
 		
+	}
+	
+	@Test (timeout = 1000)
+	public void testSendNews() {
+		CollectDocument cd = new CollectDocument();
+		User user = new User();
+		user.setPhone("13061765432");
+		Document document = new Document();
+		document.setId(6);
+		cd.setUser(user);
+		cd.setDocument(document);
+
+		// å¤åˆ¶æ§åˆ¶å™¨ä¸­çš„éƒ¨åˆ†
+		/*collectService.collectDocument(cd);
+		User u = cd.getUser();
+		Document d = documentService.selectById(cd.getDocument());
+		u = userService.getByPhone(u);
+		User temp = userService.getConcernMeList(u);
+		News n = new News();
+		for(Concern concern:temp.getConcern_me_list()) {
+			n.setBelong(concern.getUser());
+			n.setContent("(ï½¡ï½¥âˆ€ï½¥)ï¾‰ï¾å—¨~æˆ‘æ˜¯ "+u.getName()+" ,æˆ‘åˆšåˆšæ”¶è—äº†èµ„æ–™ "+d.getName()+" ,ä½ ä¹Ÿæ¥çœ‹çœ‹å§ã€‚");
+			newsService.add(n);
+		}*/
 	}
 
 }

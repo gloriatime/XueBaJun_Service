@@ -8,6 +8,7 @@ public interface UserService {
 	public boolean addUser(User user);
 	public User checkUser(User user);
 	public User checkIn(User user);
+	public User getByPhone(User user);
 	
 	// 账号管理更改信息功能
 	public User changeName(User user);

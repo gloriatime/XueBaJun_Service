@@ -8,7 +8,7 @@ public interface UserMapper {
 	
 	public int add(User user);
 	
-	public User selectByPhone(String phone);
+	public User getByPhone(User user);
 	
 	public void changePoint(User user);
 	

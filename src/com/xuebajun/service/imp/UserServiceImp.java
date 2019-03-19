@@ -31,7 +31,7 @@ public class UserServiceImp implements UserService {
 	public User checkUser(User user) {
 		// TODO Auto-generated method stub
 		User u = new User();
-		u = userMapper.selectByPhone(user.getPhone());
+		u = userMapper.getByPhone(user);
 		if(u.getPwd().compareTo(user.getPwd()) == 0) {
 			return u;
 		}else {
@@ -134,6 +134,13 @@ public class UserServiceImp implements UserService {
 	public User getCollectedCourses(User user) {
 		// TODO Auto-generated method stub
 		return userMapper.getMyCollectedCoursesList(user);
+	}
+
+
+	@Override
+	public User getByPhone(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.getByPhone(user);
 	}
 
 }

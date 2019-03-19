@@ -10,7 +10,7 @@
 	        insert into t_user(name,pwd,grade,phone,college,medicine,technology,art,agriculture,management,humanity,play) values (#{name},#{pwd},#{grade},#{phone},#{college},#{medicine},#{technology},#{art},#{agriculture},#{management},#{humanity},#{play})    
 	    </insert>
   
-	    <select id="selectByPhone" parameterType="String" resultType="User">
+	    <select id="getByPhone" parameterType="User" resultType="User">
 	        select * from t_user where phone=#{phone}    
 	    </select>
 	    
