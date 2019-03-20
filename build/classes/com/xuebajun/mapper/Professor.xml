@@ -22,6 +22,11 @@
 			update t_professor set score=#{score} and number+1 where Id=#{Id};
 		</update>
 		
+		<!-- 增加评论数 -->
+		<update id="plusCommentNumber" parameterType="Professor">
+			update t_professor set comment+1 where Id=#{Id};
+		</update>
+		
 		<!-- 教师关联课程 -->
 		<resultMap type="Professor" id="CourseBean">
 	    	<id column="professor_Id" property="Id"/>

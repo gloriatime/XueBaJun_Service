@@ -1,6 +1,7 @@
 package com.xuebajun.mapper;
 
 import com.xuebajun.pojo.Course;
+import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.Professor;
 
 public interface ProfessorMapper {
@@ -8,4 +9,5 @@ public interface ProfessorMapper {
 	public Professor getById(Professor p);
 	public Professor getMyCommentList(Professor p);
 	public void score(Professor p);
+	public void plusCommentNumber(Professor p);
 }

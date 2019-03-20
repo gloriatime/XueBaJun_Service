@@ -17,6 +17,10 @@
 		<update id="score" parameterType="Course">
 			update t_course set score=#{score} and number+1 where Id=#{Id};
 		</update>
+		<!-- 增加评论数 -->
+		<update id="plusCommentNumber" parameterType="Course">
+			update t_course set comment+1 where Id=#{Id};
+		</update>
 		
 		<!-- 课程对应教材 -->
 		<resultMap type="Course" id="Bean">

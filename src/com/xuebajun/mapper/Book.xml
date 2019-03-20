@@ -22,6 +22,10 @@
 			update t_book set score=#{score} and number+1 where Id=#{Id};
 		</update>
 	
+		<!-- 增加评论数 -->
+		<update id="plusCommentNumber" parameterType="Book">
+			update t_book set comment+1 where Id=#{Id};
+		</update>
 		
 		<select id="getRelatedCourse" parameterType="Book" resultType="Course">
 			select *

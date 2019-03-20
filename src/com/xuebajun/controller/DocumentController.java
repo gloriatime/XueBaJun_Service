@@ -40,4 +40,8 @@ public class DocumentController {
        documentService.delete(document);
     }
     
+    @RequestMapping("/PlusDownNumber")
+    public void plusDownNumber(@RequestBody Document document) {
+       documentService.plusDownNumber(document);;
+    }
 }

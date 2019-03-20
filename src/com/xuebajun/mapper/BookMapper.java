@@ -13,6 +13,7 @@ public interface BookMapper {
 	public Book getById(Book book);
 	
 	public void score(Book book);
+	public void plusCommentNumber(Book book);
 	
 	public Course getRelatedCourse(Book book);
 	public Book getTagList(Book book);

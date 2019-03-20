@@ -2,6 +2,7 @@ package com.xuebajun.mapper;
 
 import java.util.List;
 
+import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.Professor;
@@ -12,6 +13,7 @@ public interface CourseMapper {
 	public void delete(Course course);
 	public Course getById(Course course);
 	public void score(Course course);
+	public void plusCommentNumber(Course course);
 	
 	public Course getProfessorCourseList(Course course);
 	public Course getTagList(Course course);

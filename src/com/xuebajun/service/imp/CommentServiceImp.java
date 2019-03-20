@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xuebajun.mapper.BookMapper;
 import com.xuebajun.mapper.CommentMapper;
+import com.xuebajun.mapper.CourseMapper;
 import com.xuebajun.mapper.DocumentMapper;
+import com.xuebajun.mapper.ProfessorMapper;
 import com.xuebajun.mapper.ReplyMapper;
+import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.Comment;
+import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
+import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.Reply;
 import com.xuebajun.service.CommentService;
 
@@ -22,6 +28,12 @@ public class CommentServiceImp implements CommentService {
 	ReplyMapper replyMapper;
 	@Autowired
 	DocumentMapper documentMapper;
+	@Autowired
+	CourseMapper courseMapper;
+	@Autowired
+	BookMapper bookMapper;
+	@Autowired
+	ProfessorMapper professorMapper;
 	
 	@Override
 	public void deleteByFather(Comment comment) {
@@ -60,6 +72,21 @@ public class CommentServiceImp implements CommentService {
 	public void add(Comment comment) {
 		// TODO Auto-generated method stub
 		commentMapper.add(comment);
+		// 将对应对象的评论数+1
+		String type = comment.getType();
+		if(type.compareTo("document") == 0) {
+			Document d = new Document();
+			documentMapper.plusCommentNumber(d);
+		}else if(type.compareTo("course") == 0) {
+			Course course = new Course();
+			courseMapper.plusCommentNumber(course);
+		}else if(type.compareTo("book")==0) {
+			Book book = new Book();
+			bookMapper.plusCommentNumber(book);
+		}else if(type.compareTo("professor")==0) {
+			Professor p = new Professor();
+			professorMapper.plusCommentNumber(p);
+		}
 	}
 
 	@Override

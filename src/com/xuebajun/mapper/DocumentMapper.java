@@ -12,6 +12,8 @@ public interface DocumentMapper {
 	public void delete(Document document);
 	public Document getById(Document document);
 	public void score(Document document);
+	public void plusCommentNumber(Document document);
+	public void plusDownNumber(Document d);
 	
 	public Document getTagList(Document document);
 	public Document getMyCommentList(Document document);

@@ -139,4 +139,10 @@ public class DocumentServiceImp implements DocumentService {
 		return d;
 	}
 
+	@Override
+	public void plusDownNumber(Document d) {
+		// TODO Auto-generated method stub
+		documentMapper.plusDownNumber(d);
+	}
+
 }
