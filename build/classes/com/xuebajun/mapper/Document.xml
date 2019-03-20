@@ -19,6 +19,11 @@
 			select * from t_document where Id=#{Id}
 		</select>
 		
+		<!-- 打分 -->
+		<update id="score" parameterType="Document">
+			update t_document set score=#{score} and number+1 where Id=#{Id};
+		</update>
+		
 		<!-- 查看评论功能：得到评论列表 -->
 		 <resultMap type="Document" id="DocumentBean">
 	    	<id column="document_id" property="Id"/>

@@ -12,6 +12,8 @@ public interface BookMapper {
 	public void delete(Book book);
 	public Book getById(Book book);
 	
+	public void score(Book book);
+	
 	public Course getRelatedCourse(Book book);
 	public Book getTagList(Book book);
 	public Book getMyCommentList(Book book);

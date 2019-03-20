@@ -16,6 +16,11 @@
 		<select id="getById" parameterType="Book" resultType="Book">
 			select * from t_book where Id=#{Id}
 		</select>
+		
+		<!-- 打分 -->
+		<update id="score" parameterType="Book">
+			update t_book set score=#{score} and number+1 where Id=#{Id};
+		</update>
 	
 		
 		<select id="getRelatedCourse" parameterType="Book" resultType="Course">

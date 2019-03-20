@@ -17,6 +17,11 @@
 			select * from t_professor where Id=#{Id}
 		</select>
 		
+		<!-- 打分 -->
+		<update id="score" parameterType="Professor">
+			update t_professor set score=#{score} and number+1 where Id=#{Id};
+		</update>
+		
 		<!-- 教师关联课程 -->
 		<resultMap type="Professor" id="CourseBean">
 	    	<id column="professor_Id" property="Id"/>
