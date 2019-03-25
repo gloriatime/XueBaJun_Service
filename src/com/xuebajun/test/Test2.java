@@ -1,5 +1,7 @@
 package com.xuebajun.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xuebajun.controller.CollectController;
+import com.xuebajun.mapper.BookMapper;
+import com.xuebajun.mapper.ProfessorCourseMapper;
+import com.xuebajun.mapper.TagTagMapper;
 import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.CollectDocument;
 import com.xuebajun.pojo.Concern;
@@ -14,8 +19,11 @@ import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.Professor;
+import com.xuebajun.pojo.ProfessorCourse;
 import com.xuebajun.pojo.Tag;
+import com.xuebajun.pojo.TagTag;
 import com.xuebajun.pojo.User;
+import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.BookService;
 import com.xuebajun.service.CollectService;
 import com.xuebajun.service.ConcernService;
@@ -23,13 +31,16 @@ import com.xuebajun.service.CourseService;
 import com.xuebajun.service.DocumentService;
 import com.xuebajun.service.NewsService;
 import com.xuebajun.service.ProfessorService;
+import com.xuebajun.service.RecommendService;
+import com.xuebajun.service.SearchService;
 import com.xuebajun.service.TagService;
 import com.xuebajun.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class Test2 {
-	
+	@Autowired
+	private SearchService searchService;
 	@Autowired
 	private CourseService courseService;
 	@Autowired
@@ -46,6 +57,11 @@ public class Test2 {
     DocumentService documentService;
 	@Autowired
     NewsService newsService;
+	@Autowired
+	private RecommendService recommendService;
+	
+	@Autowired
+	BookMapper bookMapper;
 	
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
@@ -63,10 +79,26 @@ public class Test2 {
 	public void testGetBookById() {
 		Book book = new Book();
 		book.setId(3);
+		book.setApplicant("13061765432");
 		book = bookService.getById(book);
+		
 		System.out.println("书籍信息：");
 		System.out.println("返回书籍信息："+book.getName());
 		System.out.println("相关课程信息："+book.getCourse().getName());
+	}
+	
+
+	@Test 
+	public void testGetDocumentById() {
+		Document d = new Document();
+		
+		d.setId(2);
+		d.setApplicant("13061765432");
+		d = documentService.selectById(d);
+		
+		System.out.println("资料信息：");
+		System.out.println("返回资料信息："+d.getName());
+		
 	}
 	
 	@Test (timeout = 1000)
@@ -75,9 +107,9 @@ public class Test2 {
 		p.setId(2);
 		p = professorService.getById(p);
 		System.out.println("教师信息：");
-		System.out.println("返回教师信息："+p.getIntro());
+		System.out.println("返回教师信息："+p.getName());
 		System.out.println("相关课程信息："+p.getProfessorCourseList().get(0).getCourse().getName());
-		System.out.println("相关评论信息："+p.getCommentList().get(0).getContent());
+		//System.out.println("相关评论信息："+p.getCommentList().get(0).getContent());
 	}
 	
 	@Test (timeout = 1000)
@@ -130,6 +162,51 @@ public class Test2 {
 			n.setContent("(｡･∀･)ﾉﾞ嗨~我是 "+u.getName()+" ,我刚刚收藏了资料 "+d.getName()+" ,你也来看看吧。");
 			newsService.add(n);
 		}*/
+	}
+	
+	@Test(timeout = 1000)
+	public void testGetRecommendListOfMainPage() {
+		User u = new User();
+		u.setPhone("13061765432");
+		u.setTechnology(true);
+		u.setArt(true);
+		UserTag ut = new UserTag();
+		ut = recommendService.getRecommendList(u);
+		List<Document> documents = ut.getRecommendDocumentList();
+		List<Course> courses = ut.getRecommendCourseList();
+		
+		System.out.println("推荐资料：");
+		for(Document d:documents) {
+			System.out.println(" "+d.getName());
+		}
+		System.out.println("推荐课程：");
+		for(Course c:courses) {
+			System.out.println(" "+c.getName());
+		}
+	}
+	
+	@Test(timeout = 1000)
+	public void testSignUp() {
+		User u = new User();
+		u.setPhone("13061765432");
+		u.setPwd("12345");
+		u = userService.checkUser(u);
+		
+		System.out.println(" "+u.getName());
+	}
+	
+	@Test(timeout = 1000)
+	public void testSearch() {
+		Book d = new Book();
+		d.setName("");		
+		//d = searchService.searchBook(d);
+		//List<Book> result = d.getBookList();
+		List<Book> result = bookMapper.searchBookList(d);
+		System.out.println("搜索数据返回：");
+		for(Book course:result) {
+			System.out.println(" "+course.getId());
+			System.out.println(" "+course.getName());
+		}
 	}
 
 }

@@ -236,11 +236,12 @@ public class TestHaha {
 	@Test(timeout = 1000)
 	public void testSearch() {
 		Course c = new Course();
-		c.setName("数");		
+		c.setName("医");		
 		c = searchService.searchCourse(c);
 		List<Course> result = c.getCourseList();
 		System.out.println("搜索数据返回：");
 		for(Course course:result) {
+			System.out.println(" "+course.getId());
 			System.out.println(" "+course.getName());
 			System.out.println("   "+course.getIntro());
 		}

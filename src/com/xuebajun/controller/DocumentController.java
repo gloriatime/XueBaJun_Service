@@ -42,6 +42,6 @@ public class DocumentController {
     
     @RequestMapping("/PlusDownNumber")
     public void plusDownNumber(@RequestBody Document document) {
-       documentService.plusDownNumber(document);;
+       documentService.plusDownNumber(document);
     }
 }

@@ -39,7 +39,7 @@ public class SearchServiceImp implements SearchService {
 	public Book searchBook(Book book) {
 		// TODO Auto-generated method stub
 		book.setBookList(bookMapper.searchBookList(book));
-		return null;
+		return book;
 	}
 
 }

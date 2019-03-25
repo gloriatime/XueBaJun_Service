@@ -34,8 +34,7 @@ public class SignController {
 	@RequestMapping("/SignUp")
 	public @ResponseBody User SignUp(@RequestBody User user)throws Exception{
 		
-		User u = userService.checkUser(user);
-		return u;
+		return userService.checkUser(user);
 	}
 	
     @RequestMapping("/ShowResult")

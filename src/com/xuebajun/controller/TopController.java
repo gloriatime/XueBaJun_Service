@@ -20,17 +20,17 @@ public class TopController {
 	TopService topService;
 	
 	@RequestMapping("/GetTopOneDocument")
-	public @ResponseBody Document getMyDocument() throws Exception {
+	public @ResponseBody Document getTopOneDocument() throws Exception {
 		return topService.getTopDocument();
 	}
 	
 	@RequestMapping("/GetTopOneBook")
-	public @ResponseBody Book getMyBook() throws Exception {
+	public @ResponseBody Book getTopOneBook() throws Exception {
 		return topService.getTopBook();
 	}
 	
 	@RequestMapping("/GetTopOneCourse")
-	public @ResponseBody Course getMyCourse() throws Exception {
+	public @ResponseBody Course getTopOneCourse() throws Exception {
 		return topService.getTopCourse();
 	}
 	

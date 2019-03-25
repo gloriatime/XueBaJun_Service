@@ -59,7 +59,7 @@
 	    <select id="searchBookList" parameterType="Book" resultType="Book">
 	    	select *
 	    	from t_book
-	    	where name like '%${name}%' or author like '%${name}%' or intro like '%${name}%'
+	    	where name like '%${name}%' or author like '%${name}%' or intro like '%${name}%';
 	    </select>
 	    
 	    <!-- 推荐系统：得到近一周热度第一 -->

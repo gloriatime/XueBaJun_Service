@@ -33,7 +33,7 @@ public class UserServiceImp implements UserService {
 		User u = new User();
 		u = userMapper.getByPhone(user);
 		if(u.getPwd().compareTo(user.getPwd()) == 0) {
-			return u;
+			return userMapper.getByPhone(u);
 		}else {
 			return null;
 		}
