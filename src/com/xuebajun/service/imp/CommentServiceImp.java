@@ -76,15 +76,19 @@ public class CommentServiceImp implements CommentService {
 		String type = comment.getType();
 		if(type.compareTo("document") == 0) {
 			Document d = new Document();
+			d.setId(comment.getBelong());
 			documentMapper.plusCommentNumber(d);
 		}else if(type.compareTo("course") == 0) {
 			Course course = new Course();
+			course.setId(comment.getBelong());
 			courseMapper.plusCommentNumber(course);
 		}else if(type.compareTo("book")==0) {
 			Book book = new Book();
+			book.setId(comment.getBelong());
 			bookMapper.plusCommentNumber(book);
 		}else if(type.compareTo("professor")==0) {
 			Professor p = new Professor();
+			p.setId(comment.getBelong());
 			professorMapper.plusCommentNumber(p);
 		}
 	}
