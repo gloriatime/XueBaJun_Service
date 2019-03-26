@@ -14,6 +14,7 @@ import com.xuebajun.mapper.ProfessorCourseMapper;
 import com.xuebajun.mapper.TagTagMapper;
 import com.xuebajun.pojo.Book;
 import com.xuebajun.pojo.CollectDocument;
+import com.xuebajun.pojo.Comment;
 import com.xuebajun.pojo.Concern;
 import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
@@ -26,6 +27,7 @@ import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.BookService;
 import com.xuebajun.service.CollectService;
+import com.xuebajun.service.CommentService;
 import com.xuebajun.service.ConcernService;
 import com.xuebajun.service.CourseService;
 import com.xuebajun.service.DocumentService;
@@ -219,6 +221,23 @@ public class Test2 {
 	d = scoreService.scoreDocument(d);
 		
 		System.out.println("最后得分"+d.getScore());
+	}
+	
+	@Autowired
+	CommentService commentService;
+	@Test(timeout = 1000)
+	public void testADDComment() {
+		Comment c = new Comment();
+		
+		c.setContent("我尿黄，让我来滋醒他");
+		User u = new User();
+		u.setPhone("13061765432");
+		
+		c.setCritic(u);
+		c.setBelong(2);
+		c.setType("document");
+		
+		commentService.add(c);	
 	}
 
 }

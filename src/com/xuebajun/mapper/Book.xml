@@ -24,7 +24,7 @@
 	
 		<!-- 增加评论数 -->
 		<update id="plusCommentNumber" parameterType="Book">
-			update t_book set comment+1 where Id=#{Id};
+			update t_book set comment=comment+1 where Id=#{Id};
 		</update>
 		
 		<select id="getRelatedCourse" parameterType="Book" resultType="Course">

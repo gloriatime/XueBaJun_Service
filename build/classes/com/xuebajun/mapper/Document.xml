@@ -26,12 +26,12 @@
 		
 		<!-- 增加评论数 -->
 		<update id="plusCommentNumber" parameterType="Document">
-			update t_document set comment+1 where Id=#{Id};
+			update t_document set comment=comment+1 where Id=#{Id};
 		</update>
 		
 		<!-- 增加下载数 -->
 		<update id="plusDownNumber" parameterType="Document">
-			update t_document set download+1 where Id=#{Id};
+			update t_document set download=download+1 where Id=#{Id};
 		</update>
 		
 		<!-- 查看评论功能：得到评论列表 -->

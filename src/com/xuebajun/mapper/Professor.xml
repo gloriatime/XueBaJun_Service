@@ -24,7 +24,7 @@
 		
 		<!-- 增加评论数 -->
 		<update id="plusCommentNumber" parameterType="Professor">
-			update t_professor set comment+1 where Id=#{Id};
+			update t_professor set comment=comment+1 where Id=#{Id};
 		</update>
 		
 		<!-- 教师关联课程 -->

@@ -5,8 +5,8 @@
 	
 	<mapper namespace="com.xuebajun.mapper.CommentMapper">
 		<insert id="add" parameterType="Comment">
-			insert into t_comment(critic,reply,date,content,type,belong)
-			values(#{critic.phone},#{reply},#{date},#{content},#{type},#{belong});
+			insert into t_comment(critic,date,content,type,belong)
+			values(#{critic.phone},#{date},#{content},#{type},#{belong});
 		</insert>
 		
 		
