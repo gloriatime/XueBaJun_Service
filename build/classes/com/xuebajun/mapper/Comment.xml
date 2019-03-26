@@ -22,8 +22,26 @@
 			update t_comment set content=#{content} where Id=#{id};
 		</update>
 		
-		<select id="getById" parameterType="Comment"  resultType="Comment">
-			select * from t_comment where Id=#{id};
+		<resultMap type="Comment" id="CommentBean">
+	    	<id column="comment_id" property="id"/>
+	    	<result column="comment_content" property="content"/>    		
+	    	<result column="comment_date" property="date"/>
+	    	<result column="comment_type" property="type"/>
+	    	<result column="comment_belong" property="belong"/>
+	    	
+	    	<association property="critic" javaType="User">
+	    		<id column="critic_phone" property="phone"/>
+	    		<result column="critic_name" property="name"/>
+	    		<result column="critic_head" property="head"/>
+	    	</association>
+	    	
+	    </resultMap>
+		
+		<select id="getById" parameterType="Comment"  resultMap="CommentBean">
+			select comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong",critic.phone "critic_phone",critic.name "critic_name",critic.head "critic_head"
+			from t_comment comment
+			left join t_user critic on comment.critic = critic.phone
+			where Id=#{id};
 		</select>
 		
 		<!-- 查看回复功能：得到回复列表 -->
@@ -32,18 +50,31 @@
 	    	
 	    	<collection property="replyList" ofType="Reply">
 	    	
-	    		<id column="reply_Id" property="Id"/>
+	    		<id column="reply_Id" property="id"/>
 	    		<result column="reply_content" property="content"/>
-	    		<result column="reply_critic" property="critic"/>
-	    		<result column="reply_at" property="at"/>
 	    		<result column="reply_belong" property="belong"/>
+	    		
+	    		<association property="critic" javaType="User">
+	    			<id column="critic_phone" property="phone"/>
+	    			<result column="critic_name" property="name"/>
+	    			<result column="critic_head" property="head"/>
+	    		</association>
+	    		
+	    		<association property="at" javaType="User">
+	    			<id column="at_phone" property="phone"/>
+	    			<result column="at_name" property="name"/>
+	    			<result column="at_head" property="head"/>
+	    		</association>
+	    		
 	    	</collection>
 	    </resultMap>
 	    
 	     <select id="getMyReplyList" resultMap="ReplyBean" parameterType="Comment">
-	    	select comment.*,reply.*,comment.id "comment_id",reply.Id "reply_Id",reply.content "reply_content",reply.critic "reply_critic",reply.at "reply_at",reply.belong "reply_belong"
+	    	select comment.*,reply.*,comment.id "comment_id",reply.Id "reply_Id",reply.content "reply_content",reply.belong "reply_belong",critic.phone "critic_phone",critic.name "critic_name",critic.head "critic_head",at.phone "at_phone",at.name "at_name",at.head "at_head"
 	    	from t_comment comment
 	    	left join t_reply reply on comment.id=reply.belong
+	    	left join t_user critic on reply.critic = critic.phone
+	    	left join t_user at on reply.at = at.phone 
 	    	where comment.id=#{id};
 	    </select>
 	</mapper>

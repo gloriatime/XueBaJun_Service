@@ -102,7 +102,7 @@ public class CommentServiceImp implements CommentService {
 	@Override
 	public Comment getCommentById(Comment comment) {
 		comment = commentMapper.getById(comment);
-		comment.setReplyList(commentMapper.getMyReplyList(comment));
+		comment.setReplyList(commentMapper.getMyReplyList(comment).getReplyList()) ;
 		return comment;
 	}
 

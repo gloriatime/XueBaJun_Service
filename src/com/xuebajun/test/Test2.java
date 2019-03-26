@@ -250,7 +250,20 @@ public class Test2 {
 		r.setAt(a);
 		r.setContent("滋滋滋");
 		r.setBelong(2);
-		commentService.addReply(r);
+		//commentService.addReply(r);
+	}
+	
+	@Test(timeout = 1000)
+	public void testReply() {
+		Comment c = new Comment();
+		c.setId(2);
+		
+		c = commentService.getCommentById(c);
+		System.out.println("评论信息"+c.getId()+c.getCritic().getName()+c.getContent());
+		List<Reply> list = c.getReplyList();
+		for(Reply r:list) {
+			System.out.println("回复信息"+r.getId()+r.getCritic().getName()+r.getAt().getName());
+		}
 	}
 
 }

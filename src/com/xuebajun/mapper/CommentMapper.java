@@ -9,7 +9,7 @@ public interface CommentMapper {
 	public void add(Comment comment);
 	public void deleteById(Comment comment);
 	public void deleteByFather(Comment comment);
-	public List<Reply> getMyReplyList(Comment comment);
+	public Comment getMyReplyList(Comment comment);
 	public void change(Comment comment);
 	public Comment getById(Comment comment);
 }
