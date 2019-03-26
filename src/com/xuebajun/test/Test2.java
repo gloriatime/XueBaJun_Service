@@ -90,6 +90,7 @@ public class Test2 {
 		System.out.println("书籍信息：");
 		System.out.println("返回书籍信息："+book.getName());
 		System.out.println("相关课程信息："+book.getCourse().getName());
+		System.out.println("相关评论信息："+book.getCommentList().get(0).getContent());
 	}
 	
 

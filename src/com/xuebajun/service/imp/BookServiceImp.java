@@ -45,15 +45,18 @@ public class BookServiceImp implements BookService {
 		
 		book = bookMapper.getById(book);
 		Book temp = new Book();
+		
 		temp = bookMapper.getMyCommentList(book);
+		book.setCommentList(temp.getCommentList());
+		
 		temp = bookMapper.getTagList(book);
+		book.setTagList(temp.getTagList());
 		
 		Course c  = new Course();
 		c = bookMapper.getRelatedCourse(book);
 		book.setCourse(c);
-		book.setCommentList(temp.getCommentList());
-		book.setTagList(temp.getTagList());
 		
+			
 		// 为用户增加tag浏览次数
 		for(Tag t:book.getTagList()) {
 			UserTag ut = new UserTag();
