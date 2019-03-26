@@ -21,6 +21,7 @@ import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.Professor;
 import com.xuebajun.pojo.ProfessorCourse;
+import com.xuebajun.pojo.Reply;
 import com.xuebajun.pojo.Tag;
 import com.xuebajun.pojo.TagTag;
 import com.xuebajun.pojo.User;
@@ -65,6 +66,7 @@ public class Test2 {
 	
 	@Autowired
 	BookMapper bookMapper;
+
 	
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
@@ -227,17 +229,28 @@ public class Test2 {
 	CommentService commentService;
 	@Test(timeout = 1000)
 	public void testADDComment() {
-		Comment c = new Comment();
+		//Comment c = new Comment();
 		
-		c.setContent("我尿黄，让我来滋醒他");
+		//c.setContent("我尿黄，让我来滋醒他");
+		//User u = new User();
+		//u.setPhone("13061765432");
+		
+		//c.setCritic(u);
+		//c.setBelong(2);
+		//c.setType("document");
+		
+		//commentService.add(c);	
+		
+		Reply r =new Reply();
 		User u = new User();
-		u.setPhone("13061765432");
-		
-		c.setCritic(u);
-		c.setBelong(2);
-		c.setType("document");
-		
-		commentService.add(c);	
+		u.setPhone("18291024979");
+		r.setCritic(u);
+		User a = new User();
+		a.setPhone("13061765432");
+		r.setAt(a);
+		r.setContent("滋滋滋");
+		r.setBelong(2);
+		commentService.addReply(r);
 	}
 
 }

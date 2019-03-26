@@ -220,13 +220,13 @@ public class TestHaha {
 	@Test(timeout = 1000)
 	public void SelectDocumentById() {
 		Document d = new Document();
-		d.setId(56);
+		d.setId(2);
 		d = documentService.selectById(d);
 		System.out.println("资料名："+d.getName());
-		//List<Comment> list = d.getCommentList();
-		//for(Comment c:list) {
-		//	System.out.println("   评论："+c.getId()+c.getContent());
-		//}
+		List<Comment> list = d.getCommentList();
+		for(Comment c:list) {
+			System.out.println("   评论："+c.getId()+c.getContent()+c.getCritic().getPhone());
+		}
 		for(Tag t:d.getTagList()) {
 			System.out.println("   标签："+t.getName()+t.getTimes());
 		}

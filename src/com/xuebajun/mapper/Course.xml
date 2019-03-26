@@ -75,17 +75,26 @@
 	    	
 	    		<id column="comment_Id" property="id"/>
 	    		<result column="comment_content" property="content"/>
-	    		<result column="comment_critic" property="critic"/>
+	    		
 	    		<result column="comment_date" property="date"/>
 	    		<result column="comment_type" property="type"/>
 	    		<result column="comment_belong" property="belong"/>
+	    		
+	    		<association property="critic" javaType="User">
+	    			<id column="critic_phone" property="phone"/>
+	    			<result column="critic_name" property="name"/>
+	    			<result column="critic_head" property="head"/>
+	    		</association>
 	    	</collection>
+	    	
+	    	
 	    </resultMap>
 	    
 	     <select id="getMyCommentList" resultMap="CourseBean" parameterType="Course">
-	    	select comment.*,course.*,course.Id "course_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong"
+	    	select comment.*,course.*,course.Id "course_id",comment.Id "comment_Id",comment.content "comment_content",comment.critic "comment_critic",comment.date "comment_date",comment.type "comment_type",comment.belong "comment_belong",critic.phone "critic_phone",critic.name "critic_name",critic.head "critic_head"
 	    	from t_course course
 	    	left join t_comment comment on comment.type='‘course’' and course.Id=comment.belong
+	    	left join t_user critic on comment.critic = critic.phone
 	    	where course.Id=#{Id};
 	    </select>
 		
