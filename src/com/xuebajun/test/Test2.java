@@ -32,6 +32,7 @@ import com.xuebajun.service.DocumentService;
 import com.xuebajun.service.NewsService;
 import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.RecommendService;
+import com.xuebajun.service.ScoreService;
 import com.xuebajun.service.SearchService;
 import com.xuebajun.service.TagService;
 import com.xuebajun.service.UserService;
@@ -207,6 +208,17 @@ public class Test2 {
 			System.out.println(" "+course.getId());
 			System.out.println(" "+course.getName());
 		}
+	}
+	@Autowired
+	ScoreService scoreService;
+	@Test(timeout = 1000)
+	public void testScore() {
+	Document d= new Document();
+	d.setId(2);
+	d.setScore(3);
+	d = scoreService.scoreDocument(d);
+		
+		System.out.println("最后得分"+d.getScore());
 	}
 
 }

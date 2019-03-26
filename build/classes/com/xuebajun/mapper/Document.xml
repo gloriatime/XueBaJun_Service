@@ -21,7 +21,7 @@
 		
 		<!-- 打分 -->
 		<update id="score" parameterType="Document">
-			update t_document set score=#{score} and number+1 where Id=#{Id};
+			update t_document set score=#{score},number=number+1 where Id=#{Id};
 		</update>
 		
 		<!-- 增加评论数 -->
