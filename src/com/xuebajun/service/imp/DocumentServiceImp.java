@@ -41,37 +41,12 @@ public class DocumentServiceImp implements DocumentService {
 	// 并且将标签引用次数+1
 	// 以及该用户某标签浏览次数+10（使用某标签1次=浏览某标签10次）
 	@Override
-	public void add(Document d) {
+	public Document add(Document d) {
 		// TODO Auto-generated method stub
 		// 需要获取d的Id才能为其贴标签
 		documentMapper.add(d);
 		System.out.println("document插入后自增Id返回："+d.getId());
-		
-		TagTag tt = new TagTag();
-		tt.setBelong(d.getId());
-		tt.setType("document");
-		List<Tag> tagList = d.getTagList();
-		for(Tag t:tagList) {
-			
-			// 添加对应标签关系
-			tt.setTag(t.getId());
-			tagTagMapper.add(tt);
-			
-			// 标签引用次数+1
-			tagMapper.pulsOnetoTimes(t);
-			
-			// 更改用户标签关系
-			UserTag ut = new UserTag();
-			ut.setUser(d.getUp_user());
-			ut.setTag(t.getId());
-			UserTag temp = userTagMapper.getUserTag(ut);
-			if(temp!=null) {
-				userTagMapper.pulsTentoTimes(ut);
-			}else {
-				ut.setTimes(10);
-				userTagMapper.add(ut);
-			}
-		}
+		return d;
 	}
 	
 	// 删除资料实体的同时需要删除收藏该资料的关系,关于该文档的评论以及标签关系

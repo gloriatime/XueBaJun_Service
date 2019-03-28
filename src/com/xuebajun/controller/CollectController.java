@@ -63,6 +63,8 @@ public class CollectController {
 	public void collectDocument(@RequestBody CollectDocument c) {
 		collectService.collectDocument(c);
 		User u = c.getUser();
+		// 收藏为收藏人增加标签关联程度
+		c.getDocument().setApplicant(u.getPhone());
 		Document d = documentService.selectById(c.getDocument());
 		u = userService.getByPhone(u);
 		User temp = userService.getConcernMeList(u);

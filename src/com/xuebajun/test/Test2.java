@@ -71,13 +71,13 @@ public class Test2 {
 	@Test (timeout = 1000)
 	public void testGetCourseById() {
 		Course course = new Course();
-		course.setId(3);
+		course.setId(30);
 		course.setApplicant("13061765432");
 		course = courseService.getById(course);
 		System.out.println("课程信息：");
 		System.out.println("返回课程信息："+course.getName());
 		System.out.println("相关书籍信息："+course.getBook().getName());
-		System.out.println("相关教师信息："+course.getProfessorCourseList().get(0).getProfessor().getName());
+		System.out.println("相关教师信息："+course.getProfessorCourseList().get(0).getProfessor().getId());
 	}
 	
 	@Test 
@@ -150,15 +150,17 @@ public class Test2 {
 	public void testSendNews() {
 		CollectDocument cd = new CollectDocument();
 		User user = new User();
-		user.setPhone("13061765432");
+		user.setPhone("18291024979");
 		Document document = new Document();
-		document.setId(6);
+		document.setId(2);
 		cd.setUser(user);
 		cd.setDocument(document);
 
 		// 复制控制器中的部分
-		/*collectService.collectDocument(cd);
+		collectService.collectDocument(cd);
 		User u = cd.getUser();
+		// 收藏为收藏人增加标签关联程度
+		cd.getDocument().setApplicant(u.getPhone());
 		Document d = documentService.selectById(cd.getDocument());
 		u = userService.getByPhone(u);
 		User temp = userService.getConcernMeList(u);
@@ -167,7 +169,7 @@ public class Test2 {
 			n.setBelong(concern.getUser());
 			n.setContent("(｡･∀･)ﾉﾞ嗨~我是 "+u.getName()+" ,我刚刚收藏了资料 "+d.getName()+" ,你也来看看吧。");
 			newsService.add(n);
-		}*/
+		}
 	}
 	
 	@Test(timeout = 1000)
@@ -254,7 +256,7 @@ public class Test2 {
 		//commentService.addReply(r);
 	}
 	
-	@Test(timeout = 1000)
+	/*@Test(timeout = 1000)
 	public void testReply() {
 		Comment c = new Comment();
 		c.setId(2);
@@ -265,6 +267,6 @@ public class Test2 {
 		for(Reply r:list) {
 			System.out.println("回复信息"+r.getId()+r.getCritic().getName()+r.getAt().getName());
 		}
-	}
+	}*/
 
 }

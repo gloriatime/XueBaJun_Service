@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xuebajun.mapper.TagTagMapper;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.Tag;
+import com.xuebajun.pojo.TagTag;
 import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.NewsService;
@@ -22,6 +24,7 @@ public class TagController {
 	TagService tagService;
 	
 	
+	
 	// 模糊查询查找标签
 	@RequestMapping("/GetTagListByLike")
     public @ResponseBody Tag getRecommendListOfMainPage(@RequestBody Tag tag) {
@@ -30,8 +33,8 @@ public class TagController {
 	
 	// 添加标签
 	@RequestMapping("/AddTag")
-	public void addTag(@RequestBody Tag tag) {
-		tagService.add(tag);
+	public @ResponseBody Tag addTag(@RequestBody Tag tag) {
+		return tagService.add(tag);
 	}
 	
 	// 添加标签引用次数
@@ -39,4 +42,18 @@ public class TagController {
 	public void plusOneToTimes(@RequestBody Tag tag) {
 		 tagService.pulsOnetoTimes(tag);
 	}
+	
+	// 贴标签   标签引用次数自动+1
+	@RequestMapping("/TagToDocument")
+	public void tagToDocument(@RequestBody TagTag tt) {
+		tagService.addTagTag(tt);
+	}
+	
+	// 用户标签联系 如果没有该联系会自动添加
+	@RequestMapping("/UserTagPlusTen")
+	public void userTagPlusTen(@RequestBody UserTag ut) {
+		tagService.userTagPlusTen(ut);
+	}
+	
+	
 }

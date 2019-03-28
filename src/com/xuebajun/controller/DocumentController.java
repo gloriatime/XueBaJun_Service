@@ -31,8 +31,8 @@ public class DocumentController {
     DocumentService documentService;
 
     @RequestMapping("/AddDocument")
-    public void addDocument(@RequestBody Document document) {
-       documentService.add(document);
+    public @ResponseBody Document addDocument(@RequestBody Document document) {
+       return documentService.add(document);
     }
 
     @RequestMapping("/DeleteDocument")

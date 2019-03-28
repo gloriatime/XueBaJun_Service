@@ -22,6 +22,7 @@ import com.xuebajun.pojo.Course;
 import com.xuebajun.pojo.Document;
 import com.xuebajun.pojo.News;
 import com.xuebajun.pojo.Tag;
+import com.xuebajun.pojo.TagTag;
 import com.xuebajun.pojo.User;
 import com.xuebajun.pojo.UserTag;
 import com.xuebajun.service.AboutMeService;
@@ -221,6 +222,7 @@ public class TestHaha {
 	public void SelectDocumentById() {
 		Document d = new Document();
 		d.setId(2);
+		d.setApplicant("13061765432");
 		d = documentService.selectById(d);
 		System.out.println("资料名："+d.getName());
 		List<Comment> list = d.getCommentList();
@@ -314,7 +316,7 @@ public class TestHaha {
 	public void testTagPlusTimes() {
 		Tag tag = new Tag();
 		tag.setId(6);
-		tagService.pulsOnetoTimes(tag);
+		//tagService.pulsOnetoTimes(tag);
 	}
 	
 	@Test (timeout = 1000)
@@ -322,6 +324,17 @@ public class TestHaha {
 		Tag tag = new Tag();
 		tag.setName("测试用标签");
 		tag.setType("all");
-		//tagService.add(tag);
+		//tag = tagService.add(tag);
+		//System.out.println("添加标签返回自增Id："+tag.getId());
 	}
+	
+	@Test (timeout = 1000)
+	public void testTagTag() {
+		TagTag tt = new TagTag();
+		tt.setTag(22);
+		tt.setBelong(2);
+		//tagService.addTagTag(tt);
+	}
+	
+	
 }
