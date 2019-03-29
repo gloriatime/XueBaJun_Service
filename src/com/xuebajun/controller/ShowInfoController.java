@@ -21,6 +21,7 @@ import com.xuebajun.service.NewsService;
 import com.xuebajun.service.ProfessorService;
 import com.xuebajun.service.RecommendService;
 import com.xuebajun.service.TagService;
+import com.xuebajun.service.UserService;
 
 @Controller
 @RequestMapping("")
@@ -35,6 +36,8 @@ public class ShowInfoController {
     DocumentService documentService;
 	@Autowired
     ProfessorService professorService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("/GetDocument")
     public @ResponseBody Document getDocument(@RequestBody Document document) {
@@ -54,6 +57,11 @@ public class ShowInfoController {
 	@RequestMapping("/GetProfessor")
     public @ResponseBody Professor getProfessor(@RequestBody Professor professor) {
        return professorService.getById(professor);
+    }
+	
+	@RequestMapping("/GetUser")
+    public @ResponseBody User getUser(@RequestBody User u) {
+       return userService.getByPhone(u);
     }
 
 }
